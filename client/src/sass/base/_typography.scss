@@ -1,0 +1,155 @@
+body {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: $default-font-size;
+  color: $color-grey-dark-3;
+}
+
+.heading-primary-box {
+  position: relative;
+}
+
+.heading-primary {
+  // position: relative;
+  font-family: 'Henny Penny';
+  padding-top: 15rem;
+  font-size: 12rem;
+  color: #fff;
+
+  animation-name: moveInLeft;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+
+  &__text {
+    transition: all 0.3s;
+
+    &:hover {
+      letter-spacing: 0.1rem;
+    }
+  }
+
+  &__sticker {
+    position: absolute;
+    top: 10rem;
+    right: 10%;
+
+    transform: rotate(20deg);
+
+    font-family: 'Henny Penny';
+    color: #fff;
+    font-size: 5rem;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+
+    display: inline-block;
+    padding: 1rem 10rem;
+
+    border-radius: 0.5rem;
+
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-secondary-dark, 0.8),
+      rgba($color-secondary-light, 0.8)
+    );
+
+    box-shadow: 0 0.6rem 1rem #000;
+
+    animation: fadeIn 1s;
+    animation-delay: 1s;
+    animation-fill-mode: backwards;
+
+    transition: all 0.5s;
+
+    &:hover {
+      transform: rotate(10deg);
+    }
+  }
+}
+
+.heading-secondary {
+  color: #fff;
+
+  font-size: 7rem;
+
+  & > span[class^='heading-secondary__char'] {
+    display: inline-block;
+    animation-delay: 1s;
+    animation-fill-mode: backwards;
+    transition: all 0.1s;
+
+    &:hover {
+      transform: translateY(-1rem) scale(1.05);
+      color: rgba($color-secondary-dark, 0.6) !important;
+    }
+  }
+
+  &__char1 {
+    animation: moveInBottom 0.1s cubic-bezier(0.315, 0.725, 1, 1.525);
+  }
+  &__char2 {
+    animation: moveInBottom 0.2s cubic-bezier(0.315, 0.725, 1, 1.525);
+  }
+  &__char3 {
+    animation: moveInBottom 0.3s cubic-bezier(0.315, 0.725, 1, 1.525);
+  }
+  &__char4 {
+    animation: moveInBottom 0.4s cubic-bezier(0.315, 0.725, 1, 1.525);
+  }
+  &__char5 {
+    animation: moveInBottom 0.5s cubic-bezier(0.315, 0.725, 1, 1.525);
+  }
+  &__char6 {
+    animation: moveInBottom 0.6s cubic-bezier(0.315, 0.725, 1, 1.525);
+  }
+  &__char7 {
+    animation: moveInBottom 0.7s cubic-bezier(0.315, 0.725, 1, 1.525);
+  }
+  &__char8 {
+    animation: moveInBottom 0.8s cubic-bezier(0.315, 0.725, 1, 1.525);
+  }
+  &__char9 {
+    animation: moveInBottom 0.9s cubic-bezier(0.315, 0.725, 1, 1.525);
+  }
+  &__char10 {
+    animation: moveInBottom 1s cubic-bezier(0.315, 0.725, 1, 1.525);
+  }
+  &__char11 {
+    animation: moveInBottom 1.1s cubic-bezier(0.315, 0.725, 1, 1.525);
+  }
+  &__char12 {
+    animation: moveInBottom 1.2s cubic-bezier(0.315, 0.725, 1, 1.525);
+  }
+  &__char13 {
+    animation: moveInBottom 1.3s cubic-bezier(0.315, 0.725, 1, 1.525);
+    animation-delay: 2s !important;
+  }
+  &__char14 {
+    animation: moveInBottom 1.4s cubic-bezier(0.315, 0.725, 1, 1.525);
+    animation-delay: 2s !important;
+  }
+  &__char15 {
+    animation: moveInBottom 1.5s cubic-bezier(0.315, 0.725, 1, 1.525);
+    animation-delay: 2s !important;
+  }
+  &__char16 {
+    animation: moveInBottom 1.6s cubic-bezier(0.315, 0.725, 1, 1.525);
+    animation-delay: 2s !important;
+  }
+}
+
+.heading-tertiary {
+  font-size: 7rem;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 4rem;
+
+  background-image: linear-gradient(
+    to right,
+    lighten($color-secondary-light, 2),
+    darken($color-secondary-dark, 2)
+  );
+
+  background-clip: text;
+  color: transparent;
+}

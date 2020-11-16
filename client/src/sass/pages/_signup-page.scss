@@ -1,0 +1,55 @@
+.section-signup {
+  height: 50rem;
+
+  &__container {
+    height: 100%;
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 0 3rem;
+
+    display: flex;
+    justify-content: center;
+
+    // background-image: linear-gradient(
+    //     to left bottom,
+    //     rgba($color-secondary-light, 0.8),
+    //     rgba($color-secondary-dark, 0.8)
+    //   ),
+    //   url('./cookingduet.jpg');
+  }
+}
+
+.signup-form {
+  width: 60rem;
+  padding: 2rem;
+  background-color: lightblue;
+
+  &__box {
+    position: relative;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input {
+    width: 30rem;
+    font-family: inherit;
+    color: inherit;
+    padding: 1rem 1.5rem;
+
+    border: none;
+    border-radius: 0.5rem;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $color-grey-dark-3;
+    }
+  }
+}

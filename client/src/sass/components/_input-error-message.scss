@@ -1,0 +1,15 @@
+.input-error-message {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.2rem 1rem;
+  border-radius: 0.5rem;
+  background-image: linear-gradient(
+    to right,
+    rgba(orangered, 0.8),
+    rgba(red, 0.8)
+  );
+  color: #fff;
+  font-size: 1.3rem;
+}

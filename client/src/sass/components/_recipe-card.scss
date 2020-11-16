@@ -1,0 +1,45 @@
+.recipe-card {
+  display: inline-block;
+  width: 30rem;
+  text-decoration: none;
+
+  border: 1px solid $color-grey-dark-3;
+  box-shadow: 0 1rem 1.2rem $color-grey-dark-3;
+  transition: all 0.3s;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  //   &:not(:last-child) {
+  margin-bottom: 3rem;
+  //   }
+
+  &:hover {
+    transform: translateY(-1rem) scale(1.03);
+    box-shadow: 0 2rem 2.2rem $color-grey-dark-3;
+  }
+
+  &__img > img {
+    width: 100%;
+    // background-size: cover;
+    // background-position: top;
+  }
+
+  &__text-box {
+    padding: 1rem;
+  }
+
+  &__title {
+    font-size: 2.4rem;
+    margin-top: 0;
+    color: $color-secondary;
+  }
+
+  &__description {
+    color: $color-grey-light-4 !important;
+  }
+
+  &__author {
+    font-size: 1.2rem;
+    color: $color-secondary;
+  }
+}

@@ -1,0 +1,28 @@
+.user-nav {
+  display: flex;
+
+  & a {
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $color-primary;
+  }
+
+  &__box {
+    height: 5rem;
+    padding: 0 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background-color: $color-grey-light-2;
+    }
+  }
+
+  &__line {
+    width: 0.2rem;
+    height: 5rem;
+    background-color: $color-primary;
+  }
+}

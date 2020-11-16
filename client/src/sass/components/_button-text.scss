@@ -1,0 +1,24 @@
+.button-text {
+  display: inline-block;
+  text-decoration: none;
+  padding: 1rem 1rem;
+  border-bottom: 3px solid #fff;
+  // transform: all 1s;
+
+  animation-name: moveInRight;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+
+  &__text {
+    font-size: 7rem;
+    color: #fff;
+  }
+
+  &:hover {
+    background-color: #fff;
+  }
+
+  &:hover > div {
+    color: $color-primary;
+  }
+}

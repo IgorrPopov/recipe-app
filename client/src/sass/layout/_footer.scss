@@ -1,0 +1,27 @@
+.footer {
+  margin-top: auto;
+  padding: 1.5rem 0;
+  width: 100%;
+  //   background-color: lighten($color-primary, 5);
+  background-image: linear-gradient(
+    to top right,
+    $color-primary-light,
+    $color-primary
+  );
+  box-shadow: 0 -0.1rem 0.5rem $color-grey-dark-3;
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__logo > img {
+    height: 8rem;
+    margin-bottom: 1rem;
+  }
+
+  &__legal {
+    text-align: center;
+    color: $color-primary-dark;
+  }
+}
