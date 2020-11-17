@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 
 import { UserContext } from './UserContext';
-import { isEmailValid, isPasswordValid } from './utils/inputsValidation';
+import { isEmailValid } from './utils/inputsValidation';
 
 const LoginPage = props => {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   const [password, setPassword] = useState('1111111');
   const [email, setEmail] = useState('1111111@gmail.com');
@@ -13,7 +13,7 @@ const LoginPage = props => {
   const handleSignupFormSubmit = async e => {
     e.preventDefault();
 
-    const isValidInputs = isInputsDataValid(email.trim(), password.trim());
+    const isValidInputs = isInputsDataValid(email.trim());
 
     if (!isValidInputs) return;
 
@@ -37,16 +37,16 @@ const LoginPage = props => {
         }
       }
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         const user = await response.json();
 
         setUser({ ...user });
 
-        // setInputsErrors({});
-
         props.history.push('/dashboard');
       }
-    } catch (error) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleEmailChange = e => {
@@ -59,14 +59,12 @@ const LoginPage = props => {
     setPassword(value);
   };
 
-  const isInputsDataValid = (email, password) => {
+  const isInputsDataValid = email => {
     const errors = {};
 
     const validEmail = isEmailValid(email);
-    const validPassword = isPasswordValid(password);
 
     if (validEmail.error) errors.email = validEmail.error;
-    if (validPassword.error) errors.password = validPassword.error;
 
     if (JSON.stringify(errors) === '{}') {
       setInputsErrors({});
@@ -85,6 +83,11 @@ const LoginPage = props => {
           <div className='signup-form__box'>
             {!inputsErrors.email || (
               <span className='input-error-message'>{inputsErrors.email}</span>
+            )}
+            {!inputsErrors.general || (
+              <span className='input-error-message'>
+                {inputsErrors.general}
+              </span>
             )}
             <label htmlFor='email' className='signup-form__label'>
               Email

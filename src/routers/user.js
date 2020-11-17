@@ -1,6 +1,5 @@
 const express = require('express');
 const multer = require('multer');
-// const validator = require('validator');
 const User = require('../models/user');
 const auth = require('../middleware/auth');
 
@@ -8,12 +7,12 @@ const isUserDataValid = require('./utils/isUserDataValid');
 
 const router = new express.Router();
 
-
 router.post('/users', async (req, res) => {
-  const validUserData = isUserDataValid(
-     req.body,
-     { name: true, email: true, password: true }
-  );
+  const validUserData = isUserDataValid(req.body, {
+    name: true,
+    email: true,
+    password: true,
+  });
 
   if (!validUserData.isValid) {
     return res.status(400).send({ error: validUserData.error });
@@ -26,7 +25,6 @@ router.post('/users', async (req, res) => {
     const token = await user.generateAuthToken();
     res.status(201).send({ user, token });
   } catch (e) {
-
     if (e.name === 'MongoError' && e.code === 11000) {
       return res
         .status(400)
@@ -49,18 +47,17 @@ router.post('/users/login', async (req, res) => {
 
     res.send({ user, token });
   } catch (e) {
-  
-    res.status(400).send({ error: 'Unable to login', e: e.toString() });
-    
+    res.status(400).send({ error: { general: 'Unable to login' } });
   }
 });
 
 router.post('/users/logout', auth, async (req, res) => {
   try {
-    req.user.tokens = req.user.tokens.filter(token => token.token !== req.token);
-    
-    await req.user.save();
+    req.user.tokens = req.user.tokens.filter(
+      token => token.token !== req.token
+    );
 
+    await req.user.save();
     res.send();
   } catch (e) {
     res.status(500).send();
@@ -109,30 +106,29 @@ router.patch('/users/me', auth, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedData = ['name', 'email', 'password'];
 
-  const isUpdatesAllowed = 
-    updates.every(update => allowedData.includes(update));
+  const isUpdatesAllowed = updates.every(update =>
+    allowedData.includes(update)
+  );
 
   if (!isUpdatesAllowed) {
     return res.status(400).send({ error: { general: 'Request is invalid!' } });
   }
 
-  const opt = updates.reduce((obj, update) => (obj[update] = true, obj), {});
+  const opt = updates.reduce((obj, update) => ((obj[update] = true), obj), {});
 
   const validUserData = isUserDataValid(req.body, opt);
 
   if (!validUserData.isValid) {
     return res.status(400).send({ error: validUserData.error });
   }
-  
-  try {
 
+  try {
     updates.forEach(update => (req.user[update] = req.body[update]));
 
     await req.user.save();
 
     res.send(req.user);
   } catch (e) {
-
     if (e.name === 'MongoError' && e.code === 11000) {
       return res
         .status(400)
@@ -146,18 +142,36 @@ router.patch('/users/me', auth, async (req, res) => {
 router.delete('/users/me', auth, async (req, res) => {
   try {
     await req.user.remove();
-    res.send(req.user); 
+    res.send(req.user);
   } catch (e) {
     res.status(500).send();
   }
 });
 
 const upload = multer({
-  dest: 'avatar'
+  dest: 'avatars',
+  limits: {
+    fileSize: 1000000, // 1 mgb
+  },
+  fileFilter(req, file, callback) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)/)) {
+      return callback(new Error('Please upload JPG, JPEG or PNG!'));
+    }
+
+    callback(undefined, true);
+  },
 });
 
-router.post('/users/me/avatar', upload.single('avatar'), (req, res) => {
- res.send();
-});
+router.post(
+  '/users/me/avatar',
+  auth,
+  upload.single('avatar'),
+  (req, res) => {
+    res.send();
+  },
+  (error, req, res, next) => {
+    res.status(400).send({ error: error.message });
+  }
+);
 
 module.exports = router;

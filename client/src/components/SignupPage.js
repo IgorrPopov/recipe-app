@@ -116,6 +116,11 @@ const SignupPage = props => {
             {!inputsErrors.name || (
               <span className='input-error-message'>{inputsErrors.name}</span>
             )}
+            {!inputsErrors.general || (
+              <span className='input-error-message'>
+                {inputsErrors.general}
+              </span>
+            )}
             <label htmlFor='name' className='signup-form__label'>
               Name
             </label>
