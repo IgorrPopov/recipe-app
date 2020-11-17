@@ -7,7 +7,7 @@ const LoginPage = props => {
   const { user, setUser } = useContext(UserContext);
 
   const [password, setPassword] = useState('1111111');
-  const [email, setEmail] = useState('1@gmail.com');
+  const [email, setEmail] = useState('1111111@gmail.com');
   const [inputsErrors, setInputsErrors] = useState({});
 
   const handleSignupFormSubmit = async e => {
