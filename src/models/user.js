@@ -4,59 +4,65 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Recipe = require('../models/recipe');
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 2,
-    maxlength: 25,
-    validate(value) {
-      if (!value.match(/^[\w -]{2,25}$/)) {
-        throw new Error(
-          'Name must contain only English letters, numbers, hyphens, spaces, underscores and be from 2 to 25 characters!'
-        );
-      }
-    },
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-    trim: true,
-    lowercase: true,
-    validate(value) {
-      if (!validator.isEmail(value)) {
-        throw new Error('Email is invalid!');
-      }
-    },
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 7,
-    validate(value) {
-      if (value.toLowerCase().includes('password')) {
-        throw new Error('Password cannot contain "password"!');
-      }
-    },
-  },
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true,
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 2,
+      maxlength: 25,
+      validate(value) {
+        if (!value.match(/^[\w -]{2,25}$/)) {
+          throw new Error(
+            'Name must contain only English letters, numbers, hyphens, spaces, underscores and be from 2 to 25 characters!'
+          );
+        }
       },
     },
-  ],
-}, {
-  timestamps: true
-});
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true,
+      lowercase: true,
+      validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error('Email is invalid!');
+        }
+      },
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 7,
+      validate(value) {
+        if (value.toLowerCase().includes('password')) {
+          throw new Error('Password cannot contain "password"!');
+        }
+      },
+    },
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    avatar: {
+      type: Buffer,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 userSchema.virtual('recipes', {
   ref: 'Recipe',
   localField: '_id',
-  foreignField: 'owner'
+  foreignField: 'owner',
 });
 
 // Methods are accessible on the instance of a model (user.method)
@@ -81,6 +87,7 @@ userSchema.methods.toJSON = function () {
   delete userObject.__v;
   delete userObject.createdAt;
   delete userObject.updatedAt;
+  delete userObject.avatar;
 
   return userObject;
 };
