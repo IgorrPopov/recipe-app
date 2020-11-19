@@ -21,8 +21,10 @@
 
 .signup-form {
   width: 60rem;
-  padding: 2rem;
-  background-color: lightblue;
+  // padding: 2rem;
+  margin-top: 5rem;
+  border: 1px solid $color-grey-dark-2;
+  border-radius: 0.3rem;
 
   &__box {
     position: relative;
@@ -41,8 +43,12 @@
     color: inherit;
     padding: 1rem 1.5rem;
 
-    border: none;
-    border-radius: 0.5rem;
+    border: 1px solid $color-grey-dark-3;
+    border-radius: 0.3rem;
+
+    &:hover {
+      background-color: rgba($color-primary-light, 0.1);
+    }
 
     &:focus {
       outline: none;

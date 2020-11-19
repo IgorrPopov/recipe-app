@@ -3,7 +3,7 @@ const express = require('express');
 const sharp = require('sharp');
 const User = require('../models/user');
 const auth = require('../middleware/auth');
-const { upload } = require('./utils/multerSetUp');
+const upload = require('./utils/multerSetUp');
 
 const isUserDataValid = require('./utils/isUserDataValid');
 

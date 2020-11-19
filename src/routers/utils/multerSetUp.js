@@ -1,6 +1,6 @@
 const multer = require('multer');
 
-export const upload = multer({
+module.exports = multer({
   limits: {
     fileSize: 1000000, // 1 mgb
   },
