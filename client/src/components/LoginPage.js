@@ -6,8 +6,8 @@ import { isEmailValid } from './utils/inputsValidation';
 const LoginPage = props => {
   const { setUser } = useContext(UserContext);
 
-  const [password, setPassword] = useState('1111111');
-  const [email, setEmail] = useState('1111111@gmail.com');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [inputsErrors, setInputsErrors] = useState({});
 
   const handleSignupFormSubmit = async e => {
@@ -78,56 +78,64 @@ const LoginPage = props => {
 
   return (
     <section className='section-signup'>
+      <div className='circle circle--primary'></div>
+      <div className='circle circle--secondary'></div>
       <div className='section-signup__container'>
-        <form onSubmit={handleSignupFormSubmit} className='signup-form'>
-          <div className='signup-form__box'>
-            {!inputsErrors.email || (
-              <span className='input-error-message'>{inputsErrors.email}</span>
-            )}
-            {!inputsErrors.general || (
-              <span className='input-error-message'>
-                {inputsErrors.general}
-              </span>
-            )}
-            <label htmlFor='email' className='signup-form__label'>
-              Email
-            </label>
-            <input
-              type='text'
-              name='email'
-              autoComplete='email'
-              id='email'
-              value={email}
-              onChange={handleEmailChange}
-              className='signup-form__input'
-              placeholder='something@mail.com'
-            />
-          </div>
-          <div className='signup-form__box'>
-            {!inputsErrors.password || (
-              <span className='input-error-message'>
-                {inputsErrors.password}
-              </span>
-            )}
-            <label htmlFor='password' className='signup-form__label'>
-              Password
-            </label>
-            <input
-              type='password'
-              autoComplete='new-password'
-              name='password'
-              id='password'
-              value={password}
-              onChange={handlePasswordChange}
-              className='signup-form__input'
-            />
-          </div>
-          <div className='signup-form__box'>
-            <button type='submit' className='button'>
-              Login
-            </button>
-          </div>
-        </form>
+        <div className='signup-form-wrapper'>
+          <h4 className='signup-form-header'>Sign In</h4>
+          <form onSubmit={handleSignupFormSubmit} className='signup-form'>
+            <div className='signup-form__box'>
+              {!inputsErrors.email || (
+                <span className='input-error-message'>
+                  {inputsErrors.email}
+                </span>
+              )}
+              {!inputsErrors.general || (
+                <span className='input-error-message'>
+                  {inputsErrors.general}
+                </span>
+              )}
+              {/* <label htmlFor='email' className='signup-form__label'>
+                Email
+              </label> */}
+              <input
+                type='text'
+                name='email'
+                autoComplete='email'
+                id='email'
+                value={email}
+                onChange={handleEmailChange}
+                className='signup-form__input'
+                placeholder='Email'
+              />
+            </div>
+            <div className='signup-form__box'>
+              {!inputsErrors.password || (
+                <span className='input-error-message'>
+                  {inputsErrors.password}
+                </span>
+              )}
+              {/* <label htmlFor='password' className='signup-form__label'>
+                Password
+              </label> */}
+              <input
+                type='password'
+                autoComplete='new-password'
+                name='password'
+                id='password'
+                value={password}
+                onChange={handlePasswordChange}
+                className='signup-form__input'
+                placeholder='Password'
+              />
+            </div>
+            <div className='signup-form__box'>
+              <button type='submit' className='button'>
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   );

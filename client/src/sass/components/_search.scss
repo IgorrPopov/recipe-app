@@ -16,7 +16,11 @@
     transition: all 0.3s;
 
     &:focus {
-      width: 63%;
+      width: 70%;
+      box-shadow: 0 0.3rem 6;
+    }
+
+    &:hover {
       background-color: $color-grey-light-1;
     }
 
@@ -42,12 +46,7 @@
     cursor: pointer;
 
     &:hover {
-      background-image: linear-gradient(
-        to right bottom,
-        rgba($color-primary-dark, 0.8),
-        rgba($color-primary, 0.8)
-      );
-      color: white;
+      animation: abc 2s;
 
       & > span {
         display: inline-block;
@@ -59,5 +58,19 @@
       display: inline-block;
       transform: rotate(0) scale(1);
     }
+  }
+}
+
+@keyframes abc {
+  0% {
+  }
+
+  100% {
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-dark, 0.8),
+      rgba($color-primary, 0.8)
+    );
+    color: white;
   }
 }

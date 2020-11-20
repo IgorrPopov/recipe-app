@@ -1,13 +1,13 @@
 .button {
-  width: 15rem;
+  // width: 15rem;
   padding: 1rem 0;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 5rem;
   text-transform: uppercase;
   background-image: linear-gradient(
     to right bottom,
-    $color-primary-light,
-    $color-primary-dark
+    $color-secondary-light,
+    $color-secondary-dark
   );
   color: #fff;
   font-size: 2rem;
@@ -15,12 +15,12 @@
   transition: 0.1s;
 
   &:hover {
-    transform: translateY(-0.3rem);
-    box-shadow: 0 0.2rem 0.6rem #000;
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.1rem 0.4rem #000;
     background-image: linear-gradient(
       to right bottom,
-      lighten($color-primary-light, 10),
-      darken($color-primary-dark, 10)
+      lighten($color-secondary-light, 10),
+      darken($color-secondary-dark, 10)
     );
   }
 

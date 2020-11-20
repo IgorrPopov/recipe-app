@@ -1,0 +1,31 @@
+.circle {
+  border-radius: 50%;
+  z-index: 0;
+  position: absolute;
+
+  &--primary {
+    width: 70rem;
+    height: 70rem;
+    top: -20rem;
+    // right: -20rem;
+    right: 0;
+
+    background-image: linear-gradient(
+      to left bottom,
+      rgba($color-primary-dark, 0.5),
+      rgba($color-primary-light, 1)
+    );
+  }
+
+  &--secondary {
+    width: 60rem;
+    height: 60rem;
+    bottom: 0;
+    left: -20rem;
+    background-image: linear-gradient(
+      to right top,
+      rgba($color-primary-dark, 0.5),
+      rgba($color-primary-light, 1)
+    );
+  }
+}
