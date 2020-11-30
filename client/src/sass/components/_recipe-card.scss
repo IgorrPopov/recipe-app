@@ -1,45 +1,69 @@
 .recipe-card {
-  display: inline-block;
-  width: 30rem;
+  width: 35rem;
+  height: 50rem;
+
   text-decoration: none;
 
-  border: 1px solid $color-grey-dark-3;
-  box-shadow: 0 1rem 1.2rem $color-grey-dark-3;
-  transition: all 0.3s;
+  border: 1px solid $color-primary;
+  transition: all 0.2s;
   border-radius: 0.5rem;
   overflow: hidden;
 
-  //   &:not(:last-child) {
-  margin-bottom: 3rem;
-  //   }
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
 
   &:hover {
-    transform: translateY(-1rem) scale(1.03);
-    box-shadow: 0 2rem 2.2rem $color-grey-dark-3;
+    box-shadow: 0 1rem 2.5rem rgba(#000, 0.3);
+    // transform: translateY(-1rem);
   }
 
   &__img > img {
     width: 100%;
-    // background-size: cover;
-    // background-position: top;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   &__text-box {
-    padding: 1rem;
+    background-image: linear-gradient(
+      to right,
+      rgba($color-primary, 0.05),
+      rgba($color-primary, 0.05)
+    );
+    word-break: break-all;
+    padding: 0 2rem;
+    padding-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr min-content;
   }
 
   &__title {
-    font-size: 2.4rem;
-    margin-top: 0;
-    color: $color-secondary;
-  }
+    // font-size: 2rem;
+    padding: 0 2rem;
+    display: block;
+    background-image: linear-gradient(
+      to bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 1)
+    );
 
+    // box-shadow: 0 0.5rem 2rem rgba(#000, 0.4);
+
+    justify-self: start;
+    color: #fff;
+
+    transform: translateY(-50%);
+    // margin-top: -10%;
+  }
   &__description {
-    color: $color-grey-light-4 !important;
+    align-self: start;
+    color: $color-grey-dark-3;
   }
 
   &__author {
     font-size: 1.2rem;
-    color: $color-secondary;
+    color: $color-primary;
   }
 }

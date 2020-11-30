@@ -22,13 +22,16 @@
 .section-recipes {
   &__container {
     max-width: 120rem;
-    margin: 4rem auto;
-    // padding: 0 5rem;
-    // margin-top: -15rem;
-    // padding-top: 15rem;
+    margin: 10rem auto;
+  }
 
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+    grid-row-gap: 6vw;
+    // grid-column-gap: 22.5rem;
+
+    justify-items: center;
+    align-items: center;
   }
 }

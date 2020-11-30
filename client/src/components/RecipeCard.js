@@ -7,12 +7,12 @@ const RecipeCard = () => (
     </div>
     <div className='recipe-card__text-box'>
       <div className='recipe-card__title'>
-        <h3>Borscht</h3>
+        <h3>Cake Ewa</h3>
       </div>
       <div className='recipe-card__description'>
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe
-          similique iure exercitationem distinctio qui?
+          similiq Lorem ipsum dolor, sit amet
         </p>
       </div>
       <div className='recipe-card__author'>by Igor Popov</div>

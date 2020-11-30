@@ -44,9 +44,14 @@ const HomePage = () => {
       <section className='section-recipes'>
         <h3 className='heading-tertiary'>Just try our recipes</h3>
         <div className='section-recipes__container'>
-          <RecipeCard />
-          <RecipeCard />
-          <RecipeCard />
+          <div className='section-recipes__list'>
+            <RecipeCard />
+            <RecipeCard />
+            <RecipeCard />
+            <RecipeCard />
+            <RecipeCard />
+            <RecipeCard />
+          </div>
         </div>
       </section>
     </>
