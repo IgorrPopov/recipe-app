@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from './UserContext';
 
-import AddRecipeForm from './AddRecipeForm';
+import ToggleButton from './ToggleButton';
 
 const DashboardPage = props => {
   const { user } = useContext(UserContext);
@@ -11,8 +11,8 @@ const DashboardPage = props => {
   }
 
   return (
-    <div>
-      <AddRecipeForm />
+    <div className='dashboard__container'>
+      <ToggleButton />
     </div>
   );
 };

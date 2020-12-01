@@ -11,10 +11,14 @@
     right: 0;
 
     background-image: linear-gradient(
-      to left bottom,
-      rgba($color-primary-dark, 0.5),
-      rgba($color-primary-light, 1)
-    );
+        to left bottom,
+        rgba($color-primary-dark, 0.5),
+        rgba($color-primary-light, 1)
+      ),
+      url('../../img/food-1jpg.jpg');
+
+    background-size: cover;
+    background-position: center;
   }
 
   &--secondary {
@@ -23,9 +27,12 @@
     bottom: 0;
     left: -20rem;
     background-image: linear-gradient(
-      to right top,
-      rgba($color-primary-dark, 0.5),
-      rgba($color-primary-light, 1)
-    );
+        to right top,
+        rgba($color-primary-dark, 0.5),
+        rgba($color-primary-light, 1)
+      ),
+      url('../../img/food-2.jpg');
+    background-size: cover;
+    background-position: center;
   }
 }

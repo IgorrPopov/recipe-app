@@ -1,14 +1,16 @@
 const express = require('express');
+const sharp = require('sharp');
 const Recipe = require('../models/recipe');
 const auth = require('../middleware/auth');
 const router = new express.Router();
+const upload = require('./utils/multerSetUp');
 
 router.post('/recipes', auth, async (req, res) => {
   // const recipe = new Recipe(req.body);
 
   const recipe = new Recipe({
     ...req.body,
-    owner: req.user._id
+    owner: req.user._id,
   });
 
   try {
@@ -18,6 +20,42 @@ router.post('/recipes', auth, async (req, res) => {
     res.status(400).send(e);
   }
 });
+
+// -----------------
+
+router.post(
+  '/recipesIMG',
+  auth,
+  upload.single('photo'),
+  async (req, res) => {
+    console.log(req.body);
+
+    return;
+    const buffer = await sharp(req.file.buffer)
+      .resize({ width: 500, height: 500 })
+      .png()
+      .toBuffer();
+
+    const rawRecipe = req.body;
+    rawRecipe.ingredients = rawRecipe.ingredients.split(' ');
+    rawRecipe.photo = buffer;
+
+    const recipe = new Recipe({ ...rawRecipe, owner: req.user._id });
+
+    try {
+      await recipe.save();
+      res.status(201).send(recipe);
+    } catch (e) {
+      res.status(400).send(e);
+      // console.log(e);
+    }
+  },
+  (error, req, res, next) => {
+    res.status(400).send({ error: error.message });
+    console.log(error.message);
+  }
+);
+// -----------------
 
 router.get('/recipes', auth, async (req, res) => {
   try {
@@ -30,19 +68,21 @@ router.get('/recipes', auth, async (req, res) => {
       match.category = req.query.category;
     }
 
-    await req.user.populate({
-      path: 'recipes',
-      match,
-      options: {
-        limit: 2,
-        skip: 1,
-        sort: {
-          createdAt: 1 // descending
-          // createdAt: -1 //  ascending
-        }
-      }
-    }).execPopulate();
-    res.send(req.user.recipes)
+    await req.user
+      .populate({
+        path: 'recipes',
+        match,
+        options: {
+          limit: 2,
+          skip: 1,
+          sort: {
+            createdAt: 1, // descending
+            // createdAt: -1 //  ascending
+          },
+        },
+      })
+      .execPopulate();
+    res.send(req.user.recipes);
   } catch (e) {
     res.status(500).send();
   }
@@ -55,7 +95,7 @@ router.get('/recipes/:id', auth, async (req, res) => {
     // const recipe = await Recipe.findById(req.params.id);
 
     const recipe = await Recipe.findOne({ _id, owner: req.user._id });
-  
+
     if (!recipe) {
       return res.status(404).send();
     }
@@ -74,7 +114,7 @@ router.patch('/recipes/:id', auth, async (req, res) => {
     return res.status(400).send({ error: 'Update request is empty!' });
   }
 
-  const isValidOperation = updates.every((update) =>
+  const isValidOperation = updates.every(update =>
     allowedUpdates.includes(update)
   );
 
@@ -83,13 +123,16 @@ router.patch('/recipes/:id', auth, async (req, res) => {
   }
 
   try {
-    const recipe = await Recipe.findOne({ _id: req.params.id, owner: req.user._id });
+    const recipe = await Recipe.findOne({
+      _id: req.params.id,
+      owner: req.user._id,
+    });
 
     if (!recipe) {
       return res.status(404).send();
     }
 
-    updates.forEach((update) => (recipe[update] = req.body[update]));
+    updates.forEach(update => (recipe[update] = req.body[update]));
 
     await recipe.save();
 
@@ -97,8 +140,6 @@ router.patch('/recipes/:id', auth, async (req, res) => {
     //   new: true,
     //   runValidators: true,
     // });
-
-   
 
     res.send(recipe);
   } catch (e) {
@@ -110,7 +151,10 @@ router.delete('/recipes/:id', auth, async (req, res) => {
   try {
     // const recipe = await Recipe.findByIdAndDelete(req.params.id);
 
-    const recipe = await Recipe.findOneAndDelete({ _id: req.params.id, owner: req.user._id });
+    const recipe = await Recipe.findOneAndDelete({
+      _id: req.params.id,
+      owner: req.user._id,
+    });
 
     if (!recipe) {
       return res.status(404).send();

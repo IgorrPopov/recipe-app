@@ -46,7 +46,7 @@
     cursor: pointer;
 
     &:hover {
-      animation: abc 2s;
+      animation: abc 0.2s;
 
       & > span {
         display: inline-block;
@@ -61,16 +61,16 @@
   }
 }
 
-@keyframes abc {
-  0% {
-  }
+// @keyframes abc {
+//   0% {
+//   }
 
-  100% {
-    background-image: linear-gradient(
-      to right bottom,
-      rgba($color-primary-dark, 0.8),
-      rgba($color-primary, 0.8)
-    );
-    color: white;
-  }
-}
+//   100% {
+//     background-image: linear-gradient(
+//       to right bottom,
+//       rgba($color-primary-dark, 0.8),
+//       rgba($color-primary, 0.8)
+//     );
+//     color: white;
+//   }
+// }

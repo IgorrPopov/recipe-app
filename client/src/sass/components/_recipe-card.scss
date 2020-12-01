@@ -3,6 +3,7 @@
   height: 50rem;
 
   text-decoration: none;
+  color: currentColor;
 
   border: 1px solid $color-primary;
   transition: all 0.2s;
@@ -15,7 +16,7 @@
 
   &:hover {
     box-shadow: 0 1rem 2.5rem rgba(#000, 0.3);
-    // transform: translateY(-1rem);
+    transform: translateY(-0.3rem);
   }
 
   &__img > img {

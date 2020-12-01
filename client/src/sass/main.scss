@@ -12,9 +12,12 @@
 @import './components/user-nav';
 @import './components/button-text';
 @import './components/button';
+@import './components/toggle-button';
 @import './components/recipe-card';
 @import './components/input-error-message';
 @import './components/circle';
+@import './components/recipe-form';
 
 @import './pages/home';
-@import './pages/signup-page';
+@import './pages/signup';
+@import './pages/dashboard';

@@ -3,7 +3,7 @@ import React from 'react';
 const RecipeCard = () => (
   <a href='/' className='recipe-card'>
     <div className='recipe-card__img'>
-      <img src='https://picsum.photos/300/200' alt='dish' />
+      <img src='https://source.unsplash.com/300x200?dish' alt='dish' />
     </div>
     <div className='recipe-card__text-box'>
       <div className='recipe-card__title'>

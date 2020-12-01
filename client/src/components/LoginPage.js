@@ -6,8 +6,8 @@ import { isEmailValid } from './utils/inputsValidation';
 const LoginPage = props => {
   const { setUser } = useContext(UserContext);
 
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('1111111');
+  const [email, setEmail] = useState('1@mail.com');
   const [inputsErrors, setInputsErrors] = useState({});
 
   const handleSignupFormSubmit = async e => {
