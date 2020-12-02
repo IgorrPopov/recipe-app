@@ -28,16 +28,20 @@ router.post(
   auth,
   upload.single('photo'),
   async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
+    // console.log(req.file);
 
-    return;
     const buffer = await sharp(req.file.buffer)
       .resize({ width: 500, height: 500 })
       .png()
       .toBuffer();
 
     const rawRecipe = req.body;
-    rawRecipe.ingredients = rawRecipe.ingredients.split(' ');
+    rawRecipe.ingredients = rawRecipe.ingredients
+      .trim()
+      .replace(/\s+/g, ' ')
+      .split(' ');
+
     rawRecipe.photo = buffer;
 
     const recipe = new Recipe({ ...rawRecipe, owner: req.user._id });
@@ -52,7 +56,7 @@ router.post(
   },
   (error, req, res, next) => {
     res.status(400).send({ error: error.message });
-    console.log(error.message);
+    console.log('Error: ', error.message);
   }
 );
 // -----------------

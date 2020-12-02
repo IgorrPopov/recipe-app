@@ -15,8 +15,8 @@
   grid-template-rows: 1fr 1fr;
 
   &:hover {
-    box-shadow: 0 1rem 2.5rem rgba(#000, 0.3);
-    transform: translateY(-0.3rem);
+    box-shadow: 0 0.5rem 1.5rem rgba(#000, 0.3);
+    // transform: translateY(-0.3rem);
   }
 
   &__img > img {

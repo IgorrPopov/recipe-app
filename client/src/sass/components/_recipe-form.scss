@@ -33,6 +33,12 @@
     font-family: inherit;
     color: currentColor;
     border-radius: 1rem;
+    outline: none;
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
   }
 
   &__label {
@@ -45,6 +51,7 @@
   }
 
   &__box {
+    position: relative;
     &--title {
       grid-column: 1 / -1;
       display: flex;
@@ -116,18 +123,13 @@
       padding: 0.7rem 0;
       min-width: 17rem;
       transition: all 0.2s;
+      outline: none;
 
       &:hover,
       &:active {
         color: #fff;
         background-color: $color-primary;
-        // box-shadow: 0 0.5rem 1rem rgba(#000, 0.3);
-        // transform: translateY(-0.2rem);
-      }
-
-      &:active {
-        // transform: translateY(0);
-        // box-shadow: none;
+        outline: none;
       }
     }
 
