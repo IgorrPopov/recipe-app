@@ -2,47 +2,32 @@ const express = require('express');
 const sharp = require('sharp');
 const Recipe = require('../models/recipe');
 const auth = require('../middleware/auth');
-const router = new express.Router();
 const upload = require('./utils/multerSetUp');
+const isRecipeDataValid = require('./utils/isRecipeDataValid');
 
-router.post('/recipes', auth, async (req, res) => {
-  // const recipe = new Recipe(req.body);
+const router = new express.Router();
 
-  const recipe = new Recipe({
-    ...req.body,
-    owner: req.user._id,
-  });
-
-  try {
-    await recipe.save();
-    res.status(201).send(recipe);
-  } catch (e) {
-    res.status(400).send(e);
-  }
-});
-
-// -----------------
-
+// Create a recipe
 router.post(
-  '/recipesIMG',
+  '/recipes',
   auth,
   upload.single('photo'),
   async (req, res) => {
-    // console.log(req.body);
-    // console.log(req.file);
+    const validRecipe = isRecipeDataValid(req.body);
 
-    const buffer = await sharp(req.file.buffer)
-      .resize({ width: 500, height: 500 })
-      .png()
-      .toBuffer();
+    if (validRecipe.error)
+      return res.status(400).send({ error: validRecipe.error });
 
-    const rawRecipe = req.body;
-    rawRecipe.ingredients = rawRecipe.ingredients
-      .trim()
-      .replace(/\s+/g, ' ')
-      .split(' ');
+    const rawRecipe = validRecipe.recipe;
 
-    rawRecipe.photo = buffer;
+    if (req.file && req.file.buffer) {
+      const buffer = await sharp(req.file.buffer)
+        .resize({ width: 500, height: 500 })
+        .jpeg()
+        .toBuffer();
+
+      rawRecipe.photo = buffer;
+    }
 
     const recipe = new Recipe({ ...rawRecipe, owner: req.user._id });
 
@@ -51,15 +36,13 @@ router.post(
       res.status(201).send(recipe);
     } catch (e) {
       res.status(400).send(e);
-      // console.log(e);
     }
   },
   (error, req, res, next) => {
-    res.status(400).send({ error: error.message });
-    console.log('Error: ', error.message);
+    // Catch error from middleware
+    res.status(400).send({ error: { photo: error.message } });
   }
 );
-// -----------------
 
 router.get('/recipes', auth, async (req, res) => {
   try {
@@ -167,6 +150,21 @@ router.delete('/recipes/:id', auth, async (req, res) => {
     res.send(recipe);
   } catch (e) {
     res.status(500).send();
+  }
+});
+
+router.get('/recipes/:id/photo', async (req, res) => {
+  try {
+    const recipe = await Recipe.findById(req.params.id);
+
+    if (!recipe || !recipe.photo) {
+      throw new Error();
+    }
+
+    res.set('Content-Type', 'image/jpg');
+    res.send(recipe.photo);
+  } catch (e) {
+    res.status(404).send();
   }
 });
 

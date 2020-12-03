@@ -41,33 +41,41 @@ const RecipeForm = () => {
   const handleFormSubmit = async e => {
     e.preventDefault();
 
-    const validRecipe = isValidRecipe({
-      title,
-      description,
-      ingredients,
-      category,
-      photo,
-    });
+    // const validRecipe = isValidRecipe({
+    //   title,
+    //   description,
+    //   ingredients,
+    //   category,
+    //   photo,
+    // });
 
-    if (!validRecipe) return;
+    // if (!validRecipe) return;
 
     const token = user && user.token;
 
-    const fd = new FormData();
-    fd.append('title', validRecipe.title);
-    fd.append('description', validRecipe.description);
-    fd.append('ingredients', validRecipe.ingredients);
-    fd.append('category', validRecipe.category);
-    fd.append('photo', validRecipe.photo);
+    const fd = new FormData(e.target);
+    // fd.append('title', validRecipe.title);
+    // fd.append('description', validRecipe.description);
+    // fd.append('ingredients', validRecipe.ingredients);
+    // fd.append('category', validRecipe.category);
+    // fd.append('photo', validRecipe.photo);
 
     try {
-      const response = await fetch('/recipesIMG', {
+      let response = await fetch('/recipes', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: fd,
       });
 
-      console.log({ response });
+      if (response.status === 400) {
+        response = await response.json();
+
+        if (response.error) {
+          setInputsErrors({ ...response.error });
+        }
+      } else {
+        setInputsErrors({});
+      }
     } catch (e) {}
   };
 

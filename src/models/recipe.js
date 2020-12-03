@@ -61,6 +61,19 @@ const recipeSchema = new mongoose.Schema(
   }
 );
 
+recipeSchema.methods.toJSON = function () {
+  const recipe = this;
+
+  const recipeObj = recipe.toObject();
+
+  delete recipeObj.photo;
+  delete recipeObj.createdAt;
+  delete recipeObj.updatedAt;
+  delete recipeObj.__v;
+
+  return recipeObj;
+};
+
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
 module.exports = Recipe;
