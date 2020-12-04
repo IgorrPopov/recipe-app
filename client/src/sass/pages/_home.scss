@@ -20,18 +20,34 @@
 }
 
 .section-recipes {
+  background-color: $color-grey-light-2;
+  margin-top: -100rem;
+  padding-top: 100rem;
+  margin-bottom: -1rem;
+
   &__container {
     max-width: 120rem;
     margin: 10rem auto;
+    margin-bottom: 0;
+    padding-bottom: 10rem;
+    position: relative;
+    // background-color: $color-grey-light-2;
   }
 
   &__list {
+    padding: 0 10vw;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
     grid-row-gap: 6vw;
-    // grid-column-gap: 22.5rem;
+    grid-column-gap: 22.5rem;
 
-    justify-items: center;
-    align-items: center;
+    // justify-items: center;
+    // align-items: center;
+  }
+
+  &__big-card-wrapper {
+    position: absolute;
+    top: -55rem;
+    right: -20rem;
   }
 }

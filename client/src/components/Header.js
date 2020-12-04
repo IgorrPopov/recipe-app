@@ -49,9 +49,7 @@ const Header = props => {
             className='search-form__input'
             placeholder='Find a Recipe'
           />
-          <button className='search-form__button'>
-            <span className='search-form__button-word'>Go</span>
-          </button>
+          <button className='search-form__button'>Go</button>
         </form>
         {user === null ? (
           <nav className='user-nav'>

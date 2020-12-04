@@ -1,7 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard';
+import BigRecipeCard from './BigRecipeCard';
 
 const HomePage = () => {
+  const [recipes, setRecipes] = useState([]);
+  const [titleRecipe, setTitleRecipe] = useState(false);
+
+  useEffect(() => {
+    const getRecipes = async () => {
+      try {
+        // console.log('try');
+        let response = await fetch('/recipesAll?limit=7', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        // console.log({ response });
+        if (response.status === 200) {
+          response = await response.json();
+
+          const recipesArr = response.recipes;
+
+          if (recipesArr.length > 0) {
+            recipesArr.sort(() => 0.5 - Math.random());
+            setTitleRecipe(recipesArr[0]);
+            setRecipes(recipesArr.filter((elm, index) => index !== 0));
+          }
+        }
+      } catch (e) {
+        // console.log('try');
+      }
+    };
+
+    getRecipes();
+  }, []);
+
+  // useEffect(() => {
+  //   console.log({ recipes });
+  // }, [recipes]);
+
   return (
     <>
       <section className='section-about'>
@@ -42,16 +80,21 @@ const HomePage = () => {
         </div>
       </section>
       <section className='section-recipes'>
-        <h3 className='heading-tertiary'>Just try our recipes</h3>
+        {/* <h3 className='heading-tertiary'>Just try our recipes</h3> */}
         <div className='section-recipes__container'>
-          <div className='section-recipes__list'>
-            <RecipeCard />
-            <RecipeCard />
-            <RecipeCard />
-            <RecipeCard />
-            <RecipeCard />
-            <RecipeCard />
-          </div>
+          {!titleRecipe || (
+            <div className='section-recipes__big-card-wrapper'>
+              <BigRecipeCard recipe={titleRecipe} />
+            </div>
+          )}
+
+          {!recipes.length || (
+            <div className='section-recipes__list'>
+              {recipes.map(recipe => (
+                <RecipeCard recipe={recipe} key={recipe._id} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </>

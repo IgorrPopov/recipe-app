@@ -3,7 +3,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   font-size: $default-font-size;
-  color: $color-grey-dark-3;
+  color: $color-grey-dark-1;
 }
 
 .heading-primary-box {
@@ -45,7 +45,7 @@ body {
     display: inline-block;
     padding: 1rem 10rem;
 
-    border-radius: 0.5rem;
+    border-radius: 0.1rem;
 
     background-image: linear-gradient(
       to right bottom,

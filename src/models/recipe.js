@@ -34,7 +34,7 @@ const recipeSchema = new mongoose.Schema(
             throw new Error('Ingredients description is to short!');
           }
 
-          if (ingredient.length > 50) {
+          if (ingredient.length > 200) {
             throw new Error('Ingredients description is to long!');
           }
         });

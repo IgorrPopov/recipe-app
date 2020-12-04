@@ -44,11 +44,26 @@ router.post(
   }
 );
 
+router.get('/recipesAll', async (req, res) => {
+  const skip = parseInt(req.query.skip) || 0;
+  const limit = parseInt(req.query.limit) || 0;
+
+  try {
+    const recipes = await Recipe.find({})
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: 1 });
+    res.send({ recipes });
+  } catch (e) {
+    res.status(500).send();
+  }
+});
+
+// for one user
 router.get('/recipes', auth, async (req, res) => {
   try {
     // const recipes = await Recipe.find({});
     // const recipes = await Recipe.find({ owner:  req.user._id });
-
     const match = {};
 
     if (req.query.category) {
@@ -60,8 +75,8 @@ router.get('/recipes', auth, async (req, res) => {
         path: 'recipes',
         match,
         options: {
-          limit: 2,
-          skip: 1,
+          limit: 0,
+          skip: 0,
           sort: {
             createdAt: 1, // descending
             // createdAt: -1 //  ascending

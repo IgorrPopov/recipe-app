@@ -1,7 +1,7 @@
 .recipe-form {
   margin: 5rem;
   height: 50vh;
-  border-radius: 4rem;
+  // border-radius: 4rem;
   background-image: linear-gradient(
     to left top,
     $color-secondary-light,
@@ -21,7 +21,11 @@
     font-size: 1.5rem;
     outline: none;
     border: none;
-    border-radius: 5rem;
+    // border-radius: 5rem;
+
+    &::placeholder {
+      color: $color-grey-light-4;
+    }
   }
 
   &__textarea {
@@ -32,8 +36,12 @@
     border: none;
     font-family: inherit;
     color: currentColor;
-    border-radius: 1rem;
+    // border-radius: 1rem;
     outline: none;
+
+    &::placeholder {
+      color: $color-grey-light-4;
+    }
 
     &:active,
     &:focus {
@@ -60,6 +68,9 @@
 
       & input {
         flex: 1.5;
+        &::placeholder {
+          color: $color-grey-light-4;
+        }
       }
 
       & label {
@@ -119,7 +130,7 @@
       font-size: 2rem;
       background-color: #fff;
       border: 2px solid $color-primary;
-      border-radius: 5rem;
+      // border-radius: 5rem;
       padding: 0.7rem 0;
       min-width: 17rem;
       transition: all 0.2s;

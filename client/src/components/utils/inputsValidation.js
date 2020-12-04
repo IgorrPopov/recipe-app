@@ -92,19 +92,25 @@ const areIngredientsValid = value => {
   if (!value || typeof value !== 'string')
     return { error: 'There are no ingredients!' };
 
-  value = value.trim().replace(/\s+/g, ' ');
-  const valueArr = value.split(' ');
+  // Record separator; end of a record or row.
+  const RS = String.fromCharCode(30);
+
+  value = value
+    .trim()
+    .replace(/(\n|\r)+/g, RS)
+    .replace(/\s+/g, ' ');
+  const valueArr = value.split(RS).filter(ingredient => ingredient !== ' ');
 
   if (valueArr.length < 1) return { error: 'There are no ingredients!' };
 
   if (valueArr.length > 200) return { error: 'There are to many ingredients!' };
 
   const isAnyIngredientInvalid = valueArr.every(
-    ingredient => ingredient.length < 50 && ingredient.length > 1
+    ingredient => ingredient.length < 200 && ingredient.length > 1
   );
 
   if (!isAnyIngredientInvalid)
-    return { error: 'Each ingredient from 2 to 50 characters!' };
+    return { error: 'Each ingredient from 2 to 200 characters!' };
 
   return { error: false, value };
 };

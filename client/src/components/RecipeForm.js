@@ -184,7 +184,7 @@ const RecipeForm = () => {
           name='ingredients'
           value={ingredients}
           onChange={handleIngredientsChange}
-          placeholder='Separate ingredients with a space'
+          placeholder='Each ingredient on new line'
         />
       </div>
       <div className='recipe-form__box recipe-form__box--file-button'>

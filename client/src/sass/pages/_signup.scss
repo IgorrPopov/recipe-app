@@ -34,8 +34,8 @@
     $color-secondary-light,
     $color-secondary-dark
   );
-  border-top-right-radius: 3rem;
-  border-top-left-radius: 3rem;
+  // border-top-right-radius: 3rem;
+  // border-top-left-radius: 3rem;
   border: 1px solid $color-grey-dark-3;
   border-bottom: none;
 
@@ -58,7 +58,7 @@
   background-size: cover;
   background-position: top;
 
-  border-radius: 3rem;
+  // border-radius: 3rem;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 
@@ -83,7 +83,7 @@
     padding: 1.2rem 1.5rem;
 
     border: 1px solid $color-grey-dark-3;
-    border-radius: 5rem;
+    // border-radius: 5rem;
     transition: all 0.2s;
 
     &:hover {
