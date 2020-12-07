@@ -22,7 +22,7 @@ router.post(
 
     if (req.file && req.file.buffer) {
       const buffer = await sharp(req.file.buffer)
-        .resize({ width: 700, height: 400 })
+        .resize({ width: 720, height: 400 })
         .jpeg()
         .toBuffer();
 
@@ -52,7 +52,9 @@ router.get('/recipesAll', async (req, res) => {
     const recipes = await Recipe.find({})
       .skip(skip)
       .limit(limit)
-      .sort({ createdAt: 1 });
+      .sort({ createdAt: 1 })
+      .populate({ path: 'owner', select: 'name' });
+
     res.send({ recipes });
   } catch (e) {
     res.status(500).send();
@@ -90,13 +92,30 @@ router.get('/recipes', auth, async (req, res) => {
   }
 });
 
-router.get('/recipes/:id', auth, async (req, res) => {
-  const _id = req.params.id;
+// router.get('/recipes/:id', auth, async (req, res) => {
+//   const _id = req.params.id;
 
+//   try {
+//     // const recipe = await Recipe.findById(req.params.id);
+
+//     const recipe = await Recipe.findOne({ _id, owner: req.user._id });
+
+//     if (!recipe) {
+//       return res.status(404).send();
+//     }
+
+//     res.send(recipe);
+//   } catch (e) {
+//     res.status(500).send();
+//   }
+// });
+
+router.get('/recipes/:id', async (req, res) => {
   try {
-    // const recipe = await Recipe.findById(req.params.id);
-
-    const recipe = await Recipe.findOne({ _id, owner: req.user._id });
+    const recipe = await Recipe.findById(req.params.id).populate({
+      path: 'owner',
+      select: 'name',
+    });
 
     if (!recipe) {
       return res.status(404).send();
@@ -104,6 +123,7 @@ router.get('/recipes/:id', auth, async (req, res) => {
 
     res.send(recipe);
   } catch (e) {
+    console.log(e);
     res.status(500).send();
   }
 });

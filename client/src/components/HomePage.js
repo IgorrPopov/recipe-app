@@ -1,44 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard';
 import BigRecipeCard from './BigRecipeCard';
+// import LoadRecipesButton from './LoadRecipesButton';
 
 const HomePage = () => {
+  const [RECIPES_LIMIT] = useState(6);
+  const [startRecipesLimit] = useState(RECIPES_LIMIT + 1);
+  const [recipesSkip, setRecipesSkip] = useState(startRecipesLimit);
+
   const [recipes, setRecipes] = useState([]);
   const [titleRecipe, setTitleRecipe] = useState(false);
 
   useEffect(() => {
     const getRecipes = async () => {
       try {
-        // console.log('try');
-        let response = await fetch('/recipesAll?limit=7', {
+        let response = await fetch(`/recipesAll?limit=${startRecipesLimit}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
         });
-        // console.log({ response });
+
         if (response.status === 200) {
           response = await response.json();
 
           const recipesArr = response.recipes;
 
           if (recipesArr.length > 0) {
-            recipesArr.sort(() => 0.5 - Math.random());
+            // recipesArr.sort(() => 0.5 - Math.random());
             setTitleRecipe(recipesArr[0]);
             setRecipes(recipesArr.filter((elm, index) => index !== 0));
           }
         }
       } catch (e) {
-        // console.log('try');
+        console.log(e);
       }
     };
 
     getRecipes();
   }, []);
 
-  // useEffect(() => {
-  //   console.log({ recipes });
-  // }, [recipes]);
+  const loadRecipes = async () => {
+    try {
+      let response = await fetch(
+        `/recipesAll?limit=${RECIPES_LIMIT}&skip=${recipesSkip}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        response = await response.json();
+
+        const recipesArr = response.recipes;
+
+        if (recipesArr.length > 0) {
+          setRecipes([...recipes, ...recipesArr]);
+          setRecipesSkip(recipesSkip + RECIPES_LIMIT);
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <>
@@ -95,6 +122,12 @@ const HomePage = () => {
               ))}
             </div>
           )}
+          <button
+            onClick={loadRecipes}
+            className='button button--load-more-button'
+          >
+            Load more
+          </button>
         </div>
       </section>
     </>

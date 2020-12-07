@@ -1,8 +1,6 @@
 .button {
-  // width: 15rem;
   padding: 1rem 0;
   border: none;
-  // border-radius: 5rem;
   text-transform: uppercase;
   background-image: linear-gradient(
     to right bottom,
@@ -32,5 +30,26 @@
 
   &:focus {
     outline: none;
+  }
+
+  &--load-more-button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 7vw;
+    padding: 2rem 4rem;
+
+    background-image: linear-gradient(
+      to right bottom,
+      $color-primary-light,
+      $color-primary-dark
+    );
+
+    &:hover {
+      background-image: linear-gradient(
+        to right bottom,
+        lighten($color-primary-light, 10),
+        darken($color-primary-dark, 10)
+      );
+    }
   }
 }

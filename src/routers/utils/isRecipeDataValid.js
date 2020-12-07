@@ -24,7 +24,7 @@ const isCategoryValid = value => {
 
   if (value.length > 50) return { error: 'Category is to long' };
 
-  return { error: false, value };
+  return { error: false, value: value.toLowerCase() };
 };
 
 const isDescriptionValid = value => {
