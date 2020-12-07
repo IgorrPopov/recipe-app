@@ -37,7 +37,8 @@
   &__list {
     padding: 0 10vw;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 40rem));
+    grid-template-rows: repeat(auto-fit, minmax(25rem, 1fr));
     grid-row-gap: 6vw;
     grid-column-gap: 22.5rem;
 

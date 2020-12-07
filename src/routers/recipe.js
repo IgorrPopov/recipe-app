@@ -22,7 +22,7 @@ router.post(
 
     if (req.file && req.file.buffer) {
       const buffer = await sharp(req.file.buffer)
-        .resize({ width: 500, height: 500 })
+        .resize({ width: 700, height: 400 })
         .jpeg()
         .toBuffer();
 
