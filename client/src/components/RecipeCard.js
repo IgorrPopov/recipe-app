@@ -5,13 +5,17 @@ const RecipeCard = ({ recipe }) => {
   const { title, _id, owner } = recipe;
   let { description } = recipe;
 
-  if (description && description.length >= 400) {
+  if (description && description.length >= 350) {
     // to fit in a div at the bottom
-    description = description.substring(0, 400).trim() + '...';
+    description = description.substring(0, 350).trim() + '...';
   }
 
   return (
-    <Link to='/' className='recipe-card'>
+    <Link
+      to={{ pathname: `/recipes/${_id}`, state: { recipe } }}
+      className='recipe-card'
+      recipe={recipe}
+    >
       <div className='recipe-card__img'>
         <img src={`/recipes/${_id}/photo`} alt='dish' />
       </div>

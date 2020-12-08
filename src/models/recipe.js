@@ -67,8 +67,8 @@ recipeSchema.methods.toJSON = function () {
   const recipeObj = recipe.toObject();
 
   delete recipeObj.photo;
-  delete recipeObj.createdAt;
-  delete recipeObj.updatedAt;
+  // delete recipeObj.createdAt;
+  // delete recipeObj.updatedAt;
   delete recipeObj.__v;
 
   return recipeObj;

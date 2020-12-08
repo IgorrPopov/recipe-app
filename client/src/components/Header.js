@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { UserContext } from './UserContext';
@@ -6,6 +6,13 @@ import { UserContext } from './UserContext';
 const Header = props => {
   const { user, setUser } = useContext(UserContext);
   const history = useHistory();
+
+  history.listen(() => window.scrollTo(0, 0));
+
+  console.log('header rendered');
+  useEffect(() => {
+    console.log('useEffect');
+  }, []);
 
   const handleLogOutClick = async () => {
     const token = user && user.token;
