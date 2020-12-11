@@ -1,18 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { UserContext } from './UserContext';
+
+import SearchForm from './SearchForm';
 
 const Header = props => {
   const { user, setUser } = useContext(UserContext);
   const history = useHistory();
 
   history.listen(() => window.scrollTo(0, 0));
-
-  console.log('header rendered');
-  useEffect(() => {
-    console.log('useEffect');
-  }, []);
 
   const handleLogOutClick = async () => {
     const token = user && user.token;
@@ -50,14 +47,7 @@ const Header = props => {
           </Link>
         </div>
 
-        <form action='#' className='search-form'>
-          <input
-            type='text'
-            className='search-form__input'
-            placeholder='Find a Recipe'
-          />
-          <button className='search-form__button'>Go</button>
-        </form>
+        <SearchForm />
         {user === null ? (
           <nav className='user-nav'>
             <Link to='/signup'>

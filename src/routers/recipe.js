@@ -203,4 +203,23 @@ router.get('/recipes/:id/photo', async (req, res) => {
   }
 });
 
+router.get('/recipes/search/:input', async (req, res) => {
+  const input = req.params.input || '';
+  console.log(input);
+
+  if (!input.trim()) {
+    return res.status(400).send();
+  }
+
+  try {
+    const recipes = await Recipe.find({
+      $or: [{ $text: { $search: input } }],
+    });
+
+    res.send({ recipes });
+  } catch (e) {
+    res.status(500).send();
+  }
+});
+
 module.exports = router;
