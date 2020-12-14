@@ -1,0 +1,56 @@
+.account__container {
+  margin: 0 auto;
+  margin-top: 5rem;
+  max-width: 120rem;
+
+  display: flex;
+  justify-content: center;
+}
+.account-card {
+  width: 80rem;
+  height: 60rem;
+  display: flex;
+
+  &__img {
+    width: 50%;
+    height: 100%;
+    // background-color: green;
+    background-image: linear-gradient(
+        to left bottom,
+        rgba($color-primary-dark, 0.8),
+        rgba($color-primary-light, 0.8)
+      ),
+      url('../../img/food-1jpg.jpg');
+    // background-position: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    // object-fit: fill;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & button {
+      margin-top: 3rem;
+    }
+  }
+
+  &__avatar {
+    width: 50%;
+    // height: 50%;
+    // object-fit: fill;
+    //   display: block;
+    //   width: 10%;
+  }
+
+  &__icon {
+    color: #fff;
+    font-size: 15rem;
+  }
+
+  &__actions {
+    width: 50%;
+    height: 100%;
+    background-color: #fff;
+  }
+}

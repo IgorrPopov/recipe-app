@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import RecipesList from './RecipesList';
 
 const RecipesPage = props => {
   const [recipes, setRecipes] = useState(
@@ -10,10 +11,14 @@ const RecipesPage = props => {
   }, [props.history.location.state]);
 
   return (
-    <div>
-      {recipes.map(recipe => (
-        <div key={recipe._id}>{recipe.title}</div>
-      ))}
+    <div className='section-recipes__container'>
+      {recipes.length ? (
+        <RecipesList recipes={recipes} />
+      ) : (
+        <div className='invalid-search-message'>
+          Did not match any recipe, try again
+        </div>
+      )}
     </div>
   );
 };

@@ -59,12 +59,26 @@ const Header = props => {
             </Link>
           </nav>
         ) : (
-          <>
-            <div>
-              <Link to='/dashboard'>Kitchen</Link>
+          <nav className='user-nav user-nav__logged-user'>
+            <i className='far fa-user'></i>
+            <div className='user-nav__dropdown'>
+              <div className='user-nav__dropdown-title'>
+                <i className='fas fa-angle-double-down'></i>Kitchen
+              </div>
+              <div className='user-nav__dropdown-content'>
+                <Link to='/account'>
+                  <i className='fas fa-user-alt'></i>My Account
+                </Link>
+                <Link to='/dashboard'>
+                  <i className='fas fa-utensils'></i>My Recipes
+                </Link>
+                <Link to='/' onClick={handleLogOutClick}>
+                  <i className='fas fa-sign-out-alt'></i>Logout
+                </Link>
+              </div>
             </div>
-            <button onClick={handleLogOutClick}>Logout</button>
-          </>
+            {/* <div className='user-nav__line'></div> */}
+          </nav>
         )}
       </div>
     </header>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import RecipeCard from './RecipeCard';
+
 import BigRecipeCard from './BigRecipeCard';
-// import LoadRecipesButton from './LoadRecipesButton';
+import RecipesList from './RecipesList';
 
 const HomePage = () => {
   const [RECIPES_LIMIT] = useState(6);
@@ -115,13 +115,7 @@ const HomePage = () => {
             </div>
           )}
 
-          {!recipes.length || (
-            <div className='section-recipes__list'>
-              {recipes.map(recipe => (
-                <RecipeCard recipe={recipe} key={recipe._id} />
-              ))}
-            </div>
-          )}
+          {!recipes.length || <RecipesList recipes={recipes} />}
           <button
             onClick={loadRecipes}
             className='button button--load-more-button'

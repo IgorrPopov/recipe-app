@@ -59,9 +59,10 @@
   }
 
   &__description {
-    text-indent: 3rem;
+    // text-indent: 3rem;
     color: $color-grey-dark-3;
     overflow: hidden;
+    word-break: break-word;
   }
 
   &__author {

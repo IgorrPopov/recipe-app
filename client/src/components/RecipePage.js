@@ -5,8 +5,8 @@ const RecipePage = props => {
   const { _id, title, category, description, ingredients, owner = {} } = recipe;
 
   let { createdAt = '', updatedAt = '' } = recipe;
-  createdAt = createdAt.replaceAll('-', '.').split('T')[0];
-  updatedAt = updatedAt.replaceAll('-', '.').split('T')[0];
+  createdAt = createdAt.split('T')[0].split('-').reverse().join('.');
+  updatedAt = updatedAt.split('T')[0].split('-').reverse().join('.');
 
   return (
     <div className='recipe-view__container'>

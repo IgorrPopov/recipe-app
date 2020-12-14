@@ -4,8 +4,8 @@
   text-transform: uppercase;
   background-image: linear-gradient(
     to right bottom,
-    $color-secondary-light,
-    $color-secondary-dark
+    $color-primary-light,
+    $color-primary-dark
   );
   color: #fff;
   font-size: 2rem;
@@ -17,8 +17,8 @@
     box-shadow: 0 0.1rem 0.4rem #000;
     background-image: linear-gradient(
       to right bottom,
-      lighten($color-secondary-light, 10),
-      darken($color-secondary-dark, 10)
+      lighten($color-primary-light, 10),
+      darken($color-primary-dark, 10)
     );
   }
 
@@ -51,5 +51,10 @@
         darken($color-primary-dark, 10)
       );
     }
+  }
+
+  &--upload-avatar {
+    font-size: 1.5rem;
+    padding: 1rem 3rem;
   }
 }

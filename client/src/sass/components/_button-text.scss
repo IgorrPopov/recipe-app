@@ -2,20 +2,24 @@
   display: inline-block;
   text-decoration: none;
   padding: 1rem 1rem;
-  border-bottom: 3px solid #fff;
-  // transform: all 1s;
+  border-bottom: 3px solid $color-primary;
+  color: $color-primary;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-transform: uppercase;
 
   animation-name: moveInRight;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-timing-function: ease-out;
 
   &__text {
     font-size: 7rem;
-    color: #fff;
+    color: red;
   }
 
   &:hover {
-    background-color: #fff;
+    background-color: $color-primary;
+    color: #ffffff;
   }
 
   &:hover > div {

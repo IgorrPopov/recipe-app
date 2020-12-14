@@ -7,6 +7,7 @@ import HomePage from '../components/HomePage';
 import DashboardPage from '../components/DashboardPage';
 import RecipePage from '../components/RecipePage';
 import RecipesPage from '../components/RecipesPage';
+import AccountPage from '../components/AccountPage';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -25,6 +26,7 @@ const AppRouter = () => (
         {/* <Suspense fallback={<div>Loading...</div>}> */}
         <Route path='/recipes/:id' component={RecipePage} />
         <Route path='/recipes' component={RecipesPage} />
+        <Route path='/account' component={AccountPage} />
         {/* </Suspense> */}
       </Switch>
     </main>

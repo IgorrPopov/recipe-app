@@ -31,12 +31,12 @@
   height: 10rem;
   background-image: linear-gradient(
     to left,
-    $color-secondary-light,
-    $color-secondary-dark
+    $color-primary-light,
+    $color-primary-dark
   );
   // border-top-right-radius: 3rem;
   // border-top-left-radius: 3rem;
-  border: 1px solid $color-grey-dark-3;
+  // border: 1px solid $color-grey-dark-3;
   border-bottom: none;
 
   color: white;
@@ -62,8 +62,8 @@
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 
-  border: 1px solid $color-grey-dark-3;
-  border-top: none;
+  // border: 1px solid $color-grey-dark-3;
+  // border-top: none;
 
   &__box {
     position: relative;
@@ -82,7 +82,7 @@
     color: inherit;
     padding: 1.2rem 1.5rem;
 
-    border: 1px solid $color-grey-dark-3;
+    border: 1px solid $color-primary;
     // border-radius: 5rem;
     transition: all 0.2s;
 

@@ -52,7 +52,7 @@ const SearchForm = props => {
         onChange={handleInputChange}
       />
       <button type='submit' className='search-form__button'>
-        Go
+        <i className='fas fa-search'></i>
       </button>
     </form>
   );
