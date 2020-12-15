@@ -157,7 +157,7 @@ router.post(
   async (req, res) => {
     const buffer = await sharp(req.file.buffer)
       .resize({ width: 250, height: 250 })
-      .png()
+      .jpeg()
       .toBuffer();
 
     req.user.avatar = buffer;

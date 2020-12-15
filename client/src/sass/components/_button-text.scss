@@ -1,17 +1,20 @@
 .button-text {
   display: inline-block;
   text-decoration: none;
-  padding: 1rem 1rem;
+  padding: 1rem 0;
+  width: 25rem;
   border-bottom: 3px solid $color-primary;
   color: $color-primary;
   font-weight: bold;
   font-size: 1.5rem;
   text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.5rem;
 
   animation-name: moveInRight;
   animation-duration: 1s;
   animation-timing-function: ease-out;
-
+  transition: all 0.2s;
   &__text {
     font-size: 7rem;
     color: red;
@@ -20,9 +23,13 @@
   &:hover {
     background-color: $color-primary;
     color: #ffffff;
+    box-shadow: 0 1rem 2rem rgba(black, 0.15);
+    transform: translateY(-2px);
+    // transition: all 0.2s;
   }
 
-  &:hover > div {
-    color: $color-primary;
+  &:active {
+    box-shadow: none;
+    transform: translateY(0);
   }
 }

@@ -48,6 +48,9 @@ router.get('/recipesAll', async (req, res) => {
   const skip = parseInt(req.query.skip) || 0;
   const limit = parseInt(req.query.limit) || 0;
 
+  if (skip > 10) skip = 10;
+  if (limit > 10) limit = 10;
+
   try {
     const recipes = await Recipe.find({})
       .skip(skip)
@@ -214,6 +217,9 @@ router.get('/recipes/search/:input', async (req, res) => {
   try {
     const recipes = await Recipe.find({
       $or: [{ $text: { $search: input } }],
+    }).populate({
+      path: 'owner',
+      select: 'name',
     });
 
     res.send({ recipes });

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { UserContext } from './UserContext';
@@ -7,9 +7,30 @@ import SearchForm from './SearchForm';
 
 const Header = props => {
   const { user, setUser } = useContext(UserContext);
+  const [avatarImg, setAvatarImg] = useState(null);
+
   const history = useHistory();
 
   history.listen(() => window.scrollTo(0, 0));
+
+  useEffect(() => {
+    if (user?.user?._id) {
+      const avatar = (
+        <img
+          src={`/users/${user.user._id}/avatar`}
+          alt='avatar'
+          className='user-nav__avatar'
+          onError={handleImgError}
+        />
+      );
+
+      setAvatarImg(avatar);
+    }
+  }, [user]);
+
+  const handleImgError = () => {
+    setAvatarImg(null);
+  };
 
   const handleLogOutClick = async () => {
     const token = user && user.token;
@@ -60,7 +81,7 @@ const Header = props => {
           </nav>
         ) : (
           <nav className='user-nav user-nav__logged-user'>
-            <i className='far fa-user'></i>
+            {avatarImg ?? <i className='far fa-user'></i>}
             <div className='user-nav__dropdown'>
               <div className='user-nav__dropdown-title'>
                 <i className='fas fa-angle-double-down'></i>Kitchen
