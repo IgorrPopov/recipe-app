@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import { UserContext } from './UserContext';
 import {
@@ -10,12 +10,16 @@ import {
 const AccountEditPage = props => {
   const { user, setUser } = useContext(UserContext);
 
-  const [name, setName] = useState(user?.user?.name || '');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
-  const [email, setEmail] = useState(user?.user?.email || '');
+  const [email, setEmail] = useState('');
   const [inputsErrors, setInputsErrors] = useState({});
+
+  useEffect(() => {
+    console.log('useEffect: ', { inputsErrors });
+  }, [inputsErrors]);
 
   const handleSignupFormSubmit = async e => {
     e.preventDefault();
@@ -67,25 +71,21 @@ const AccountEditPage = props => {
         response = await response.json();
 
         if (response.error) {
-          setInputsErrors({ ...response.error });
+          return setInputsErrors({ ...response.error });
         }
       }
 
       if (response.status === 200) {
-        const user = await response.json();
+        const updatedUser = await response.json();
 
-        console.log({ user });
+        // console.log({ updatedUser });
 
-        setUser(user3);
+        setUser({ user: { ...updatedUser }, token: user.token });
 
-        setTimeout(() => {
-          console.log({ user });
-        }, 2000);
-
-        // setInputsErrors({});
-
-        props.history.push('/account');
+        return props.history.push('/account');
       }
+
+      setInputsErrors({});
     } catch (error) {}
   };
 
@@ -177,7 +177,7 @@ const AccountEditPage = props => {
                 value={name}
                 onChange={handleNameChange}
                 className='signup-form__input'
-                placeholder='Name'
+                placeholder={user?.user?.name || 'Name'}
               />
             </div>
             <div className='signup-form__box'>
@@ -197,25 +197,10 @@ const AccountEditPage = props => {
                 value={email}
                 onChange={handleEmailChange}
                 className='signup-form__input'
-                placeholder='Email'
-              />
-            </div>
-            {/*  */}
-
-            <div className='signup-form__box'>
-              <input
-                type='password'
-                autoComplete='current-password'
-                name='current-password'
-                id='current-password'
-                value={currentPassword}
-                onChange={handleCurrentPasswordChange}
-                className='signup-form__input'
-                placeholder='Your Current Password (required)'
+                placeholder={user?.user?.email || 'Email'}
               />
             </div>
 
-            {/*  */}
             <div className='signup-form__box'>
               {!inputsErrors.password || (
                 <span className='input-error-message'>
@@ -255,6 +240,31 @@ const AccountEditPage = props => {
                 className='signup-form__input'
                 placeholder='New Password Repeat'
               />
+            </div>
+            {/*  */}
+
+            <div className='signup-form__box'>
+              {!inputsErrors.currentPassword || (
+                <span className='input-error-message'>
+                  {inputsErrors.currentPassword}
+                </span>
+              )}
+              <input
+                type='password'
+                autoComplete='current-password'
+                name='current-password'
+                id='current-password'
+                value={currentPassword}
+                onChange={handleCurrentPasswordChange}
+                className='signup-form__input'
+                placeholder='Your Current Password (required)'
+              />
+            </div>
+
+            {/*  */}
+            <div className='signup-form__box signup-form__box--text-message'>
+              * Fill only than inputs that you want to change but your current
+              password is required!
             </div>
             <div className='signup-form__box'>
               <button type='submit' className='button'>

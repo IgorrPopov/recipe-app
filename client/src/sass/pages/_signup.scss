@@ -74,6 +74,16 @@
 
     display: flex;
     flex-direction: column;
+
+    &--text-message {
+      color: $color-primary;
+
+      // & > span {
+      //   display: inline-block;
+      //   width: fit-content;
+      //   font-weight: bold;
+      // }
+    }
   }
 
   &__input {

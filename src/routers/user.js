@@ -105,6 +105,24 @@ router.get('/users/:id', async (req, res) => {
 });
 
 router.patch('/users/me', auth, async (req, res) => {
+  const currentPassword = req.body && req.body.currentPassword;
+
+  if (!currentPassword) {
+    return res
+      .status(400)
+      .send({ error: { currentPassword: 'Current password is required!' } });
+  }
+
+  const isValidPassowrd = await req.user.isPasswordValid(currentPassword);
+
+  if (!isValidPassowrd) {
+    return res
+      .status(400)
+      .send({ error: { currentPassword: 'Current password is invalid!' } });
+  }
+
+  delete req.body.currentPassword;
+
   const updates = Object.keys(req.body);
   const allowedData = ['name', 'email', 'password'];
 
@@ -185,6 +203,8 @@ router.get('/users/:id/avatar', async (req, res) => {
     }
 
     res.set('Content-Type', 'image/jpg');
+    res.set('Cache-Control', 'no-store');
+
     res.send(user.avatar);
   } catch (e) {
     res.status(404).send();

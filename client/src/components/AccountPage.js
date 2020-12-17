@@ -149,13 +149,16 @@ const AccountPage = props => {
           </div>
         </div>
         <form action='' className='account-card__actions'>
-          <h5>My Account</h5>
+          <h5>{user?.user?.name}</h5>
           <div className='account-card__signup-date'>
             {`Joined ${user?.user?.createdAt
               .split('T')[0]
               .split('-')
               .reverse()
               .join('.')}`}
+          </div>
+          <div className='account-card__email'>
+            Email: <span>{user?.user?.email}</span>
           </div>
           <Link to='/recipes' className='button-text'>
             Show My Recipes

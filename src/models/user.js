@@ -76,6 +76,13 @@ userSchema.methods.generateAuthToken = async function () {
   return token;
 };
 
+userSchema.methods.isPasswordValid = async function (password) {
+  const user = this;
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  return isMatch;
+};
+
 // .toJSON method is used when (res.send(stringify))
 userSchema.methods.toJSON = function () {
   const user = this;
