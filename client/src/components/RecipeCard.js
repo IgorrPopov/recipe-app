@@ -14,7 +14,6 @@ const RecipeCard = ({ recipe }) => {
     <Link
       to={{ pathname: `/recipes/${_id}`, state: { recipe } }}
       className='recipe-card'
-      recipe={recipe}
     >
       <div className='recipe-card__img'>
         <img src={`/recipes/${_id}/photo`} alt='dish' />

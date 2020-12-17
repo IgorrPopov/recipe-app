@@ -1,0 +1,66 @@
+.my-recipe-card {
+  height: 25rem;
+
+  background-color: #fff;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  grid-template-columns: 1fr 20% 20% 20%;
+
+  grid-gap: 2rem;
+
+  &:hover {
+    box-shadow: 0 0.1rem 1rem rgba(#000, 0.3);
+    // transform: translateY(-0.3rem);
+  }
+
+  &__img {
+    grid-row: 1 / 3;
+
+    // width: 100%;
+    // height: 30rem;
+
+    & > img {
+      width: 100%;
+      height: 25rem;
+
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  &__title {
+    text-decoration: none;
+    background-image: linear-gradient(
+      to left,
+      rgba($color-primary-light, 0.9),
+      rgba($color-primary-dark, 0.9)
+    );
+    grid-column: 2 / 5;
+
+    color: #ffff;
+    font-size: 4rem;
+    padding: 0 2rem;
+
+    margin-left: -20rem;
+  }
+
+  &__date {
+    grid-column: 2 / 3;
+    color: $color-primary;
+  }
+
+  &__actions {
+    grid-column: 3 / 5;
+    justify-self: end;
+    align-self: end;
+    margin: 2rem;
+
+    & > button:first-child {
+      margin-right: 2rem;
+    }
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 4vw;
+  }
+}

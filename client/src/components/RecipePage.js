@@ -21,14 +21,12 @@ const RecipePage = props => {
           <img src={`/recipes/${_id}/photo`} alt='dish' />
         </div>
         <ul className='recipe-view__ingredients'>
-          {ingredients.map((ingredient, i) => (
-            <li key={i}>{ingredient}</li>
-          ))}
+          {ingredients &&
+            ingredients.map((ingredient, i) => <li key={i}>{ingredient}</li>)}
         </ul>
         <div className='recipe-view__description'>
-          {description.split('\n').map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+          {description &&
+            description.split('\n').map((p, i) => <p key={i}>{p}</p>)}
         </div>
       </div>
     </div>

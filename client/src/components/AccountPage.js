@@ -24,6 +24,7 @@ const AccountPage = props => {
       );
 
       setAvatarImg(avatar);
+      // setUser(user);
     }
   };
 
@@ -160,7 +161,7 @@ const AccountPage = props => {
           <div className='account-card__email'>
             Email: <span>{user?.user?.email}</span>
           </div>
-          <Link to='/recipes' className='button-text'>
+          <Link to='/dashboard' className='button-text'>
             Show My Recipes
           </Link>
           <Link to='/account/edit' className='button-text'>
