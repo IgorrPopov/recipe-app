@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from './UserContext';
 
-// import ToggleButton from './ToggleButton';
 import MyRecipeCard from './MyRecipeCard';
 
 const DashboardPage = props => {
@@ -142,13 +141,26 @@ const DashboardPage = props => {
     if (!recipe || !recipe._id) return;
 
     props.history.push({
-      pathname: `/recipes/edit/${recipe._id}`,
+      pathname: `/recipes/${recipe._id}/edit`,
       state: { recipe },
     });
   };
 
+  const handleAddRecipeClick = () => {
+    props.history.push('/recipes/add');
+  };
+
   return (
-    <div className='dashboard__container'>
+    <div className='container'>
+      <div className='dashboard__header'>
+        <div className='dashboard__title'>Your recipe collection</div>
+        <button
+          className='button button--add-recipe'
+          onClick={handleAddRecipeClick}
+        >
+          +
+        </button>
+      </div>
       {recipes.length > 0 &&
         recipes.map(recipe => (
           <MyRecipeCard

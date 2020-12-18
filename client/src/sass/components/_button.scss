@@ -82,4 +82,24 @@
       }
     }
   }
+
+  &--add-recipe {
+    font-size: 6rem;
+    font-weight: normal;
+    padding: 0 2rem;
+
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-secondary-light, 0.9),
+      rgba($color-secondary-dark, 0.9)
+    );
+
+    &:hover {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba(darken($color-secondary-light, 10), 0.9),
+        rgba(darken($color-secondary-dark, 10), 0.9)
+      );
+    }
+  }
 }

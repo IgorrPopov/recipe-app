@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { UserContext } from './UserContext';
+import { useHistory } from 'react-router-dom';
 import {
   isFileValid,
   areIngredientsValid,
@@ -8,12 +9,17 @@ import {
   isTitleValid,
 } from './utils/inputsValidation';
 
-const RecipeForm = () => {
+const RecipeForm = ({ recipe = {} }) => {
+  // console.log({ recipe });
+
   const { user } = useContext(UserContext);
-  const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
-  const [description, setDescription] = useState('');
-  const [ingredients, setIngredients] = useState('');
+  const history = useHistory();
+  const [title, setTitle] = useState(recipe?.title || '');
+  const [category, setCategory] = useState(recipe?.category || '');
+  const [description, setDescription] = useState(recipe?.description || '');
+  const [ingredients, setIngredients] = useState(
+    (recipe?.ingredients && recipe.ingredients.join(' \n ')) || ''
+  );
   const [photo, setPhoto] = useState(undefined);
   const [fileText, setFileText] = useState('No file chosen, yet');
   const [inputsErrors, setInputsErrors] = useState({});
@@ -41,31 +47,48 @@ const RecipeForm = () => {
   const handleFormSubmit = async e => {
     e.preventDefault();
 
-    // const validRecipe = isValidRecipe({
-    //   title,
-    //   description,
-    //   ingredients,
-    //   category,
-    //   photo,
-    // });
+    const validRecipe = isValidRecipe(
+      {
+        title,
+        description,
+        ingredients,
+        category,
+        photo,
+      },
+      recipe
+    );
 
-    // if (!validRecipe) return;
+    if (!validRecipe) return;
 
     const token = user && user.token;
 
-    const fd = new FormData(e.target);
-    // fd.append('title', validRecipe.title);
-    // fd.append('description', validRecipe.description);
-    // fd.append('ingredients', validRecipe.ingredients);
-    // fd.append('category', validRecipe.category);
-    // fd.append('photo', validRecipe.photo);
+    const fd = new FormData();
+    fd.append('title', validRecipe.title);
+    fd.append('description', validRecipe.description);
+    fd.append('ingredients', validRecipe.ingredients);
+    fd.append('category', validRecipe.category);
+
+    if (validRecipe.photo) {
+      fd.append('photo', validRecipe.photo);
+    }
+    // console.log(validRecipe.photo);
 
     try {
-      let response = await fetch('/recipes', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}` },
-        body: fd,
-      });
+      let response;
+
+      if (!recipe?._id) {
+        response = await fetch('/recipes', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${token}` },
+          body: fd,
+        });
+      } else {
+        response = await fetch(`/recipes/${recipe._id}`, {
+          method: 'PATCH',
+          headers: { Authorization: `Bearer ${token}` },
+          body: fd,
+        });
+      }
 
       if (response.status === 400) {
         response = await response.json();
@@ -75,11 +98,12 @@ const RecipeForm = () => {
         }
       } else {
         setInputsErrors({});
+        history.push('/dashboard');
       }
     } catch (e) {}
   };
 
-  const isValidRecipe = value => {
+  const isValidRecipe = (value, recipe) => {
     const { title, category, description, ingredients, photo } = value;
 
     const validTitle = isTitleValid(title);
@@ -95,6 +119,8 @@ const RecipeForm = () => {
     if (validDescription.error) errors.description = validDescription.error;
     if (validIngredients.error) errors.ingredients = validIngredients.error;
     if (validPhoto.error) errors.photo = validPhoto.error;
+
+    if (errors?.photo === 'No file added!' && recipe?._id) delete errors.photo;
 
     if (JSON.stringify(errors) === '{}') {
       setInputsErrors({});
@@ -201,12 +227,15 @@ const RecipeForm = () => {
           id='file'
         />
         <button type='button' onClick={handleAddPhotoButtonClick}>
-          Add photo
+          {!recipe?._id ? 'Add Image' : 'Change Image'}
         </button>
         <span id='file-text'>{fileText}</span>
       </div>
       <div className='recipe-form__box recipe-form__box--add-button'>
-        <button type='submit'>Add recipe</button>
+        <button type='submit'>
+          {' '}
+          {!recipe?._id ? 'Add Recipe' : 'Edit Recipe'}
+        </button>
       </div>
     </form>
   );

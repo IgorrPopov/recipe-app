@@ -26,6 +26,14 @@
     &::placeholder {
       color: $color-grey-light-4;
     }
+
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0.2rem 0.5rem rgba(#000, 0.2);
+      transform: scale(1.01);
+    }
   }
 
   &__textarea {
@@ -47,6 +55,14 @@
     &:focus {
       outline: none;
     }
+
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0.2rem 0.5rem rgba(#000, 0.2);
+      transform: scale(1.01);
+    }
   }
 
   &__label {
@@ -66,7 +82,7 @@
       justify-content: space-between;
       align-items: center;
 
-      & input {
+      & > input {
         flex: 1.5;
         &::placeholder {
           color: $color-grey-light-4;
@@ -124,23 +140,30 @@
 
     &--add-button button,
     &--file-button button {
+      margin-top: 2rem;
       color: $color-primary;
       text-transform: uppercase;
       font-weight: bold;
       font-size: 2rem;
       background-color: #fff;
-      border: 2px solid $color-primary;
+      border: none;
       // border-radius: 5rem;
-      padding: 0.7rem 0;
+      padding: 1rem 1rem;
       min-width: 17rem;
       transition: all 0.2s;
       outline: none;
 
-      &:hover,
-      &:active {
+      &:hover {
         color: #fff;
         background-color: $color-primary;
         outline: none;
+        transform: translateY(-2px);
+        box-shadow: 0 0.1rem 1rem rgba(#000, 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+        box-shadow: none;
       }
     }
 
@@ -149,5 +172,12 @@
       font-size: 1.2rem;
       color: #fff;
     }
+  }
+
+  transition: all 0.2s;
+
+  &:hover {
+    box-shadow: 0 0.1rem 1rem rgba(#000, 0.3);
+    // transform: translateY(-0.3rem);
   }
 }

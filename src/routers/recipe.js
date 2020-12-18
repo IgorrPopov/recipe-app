@@ -46,9 +46,9 @@ router.post(
 
 router.get('/recipesAll', async (req, res) => {
   const skip = parseInt(req.query.skip) || 0;
-  const limit = parseInt(req.query.limit) || 0;
+  let limit = parseInt(req.query.limit) || 0;
 
-  if (skip > 10) skip = 10;
+  // if (skip > 10) skip = 10;
   if (limit > 10) limit = 10;
 
   try {
@@ -135,12 +135,41 @@ router.get('/recipes/:id', async (req, res) => {
   }
 });
 
-router.patch('/recipes/:id', auth, async (req, res) => {
+// router.post(
+//   '/recipes',
+//   auth,
+//   upload.single('photo'),
+//   async (req, res) => {
+//     const validRecipe = isRecipeDataValid(req.body);
+
+//     if (validRecipe.error)
+//       return res.status(400).send({ error: validRecipe.error });
+
+//     const rawRecipe = validRecipe.recipe;
+
+//     if (req.file && req.file.buffer) {
+//       const buffer = await sharp(req.file.buffer)
+//         .resize({ width: 720, height: 400 })
+//         .jpeg()
+//         .toBuffer();
+
+//       rawRecipe.photo = buffer;
+//     }
+
+router.patch('/recipes/:id', auth, upload.single('photo'), async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ['title', 'category', 'ingredients', 'description'];
+  const allowedUpdates = [
+    'title',
+    'category',
+    'ingredients',
+    'description',
+    'photo',
+  ];
 
   if (updates.length === 0) {
-    return res.status(400).send({ error: 'Update request is empty!' });
+    return res
+      .status(400)
+      .send({ error: { general: 'Update request is empty!' } });
   }
 
   const isValidOperation = updates.every(update =>
@@ -148,9 +177,19 @@ router.patch('/recipes/:id', auth, async (req, res) => {
   );
 
   if (!isValidOperation) {
-    return res.status(400).send({ error: 'Invalid updates!' });
+    return res.status(400).send({ error: { general: 'Invalid updates!' } });
   }
+  // ----------------------
+  const validRecipe = isRecipeDataValid(req.body);
 
+  if (validRecipe.error)
+    return res.status(400).send({ error: validRecipe.error });
+
+  const rawRecipe = validRecipe.recipe;
+
+  // console.log('validRecipe.recipe: ', validRecipe.recipe);
+  // console.log('updates: ', updates);
+  // // -------------------
   try {
     const recipe = await Recipe.findOne({
       _id: req.params.id,
@@ -161,7 +200,18 @@ router.patch('/recipes/:id', auth, async (req, res) => {
       return res.status(404).send();
     }
 
-    updates.forEach(update => (recipe[update] = req.body[update]));
+    updates.forEach(update => (recipe[update] = rawRecipe[update]));
+
+    if (req.file && req.file.buffer) {
+      const buffer = await sharp(req.file.buffer)
+        .resize({ width: 720, height: 400 })
+        .jpeg()
+        .toBuffer();
+
+      recipe.photo = buffer;
+    }
+
+    console.log(recipe);
 
     await recipe.save();
 

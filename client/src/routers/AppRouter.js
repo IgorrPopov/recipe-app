@@ -10,6 +10,7 @@ import RecipesPage from '../components/RecipesPage';
 import EditRecipePage from '../components/EditRecipePage';
 import AccountPage from '../components/AccountPage';
 import AccountEditPage from '../components/AccountEditPage';
+import RecipeAddPage from '../components/RecipeAddPage';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -26,7 +27,12 @@ const AppRouter = () => (
         <Route path='/login' component={LoginPage} />
         <Route path='/dashboard' component={DashboardPage} />
         {/* <Suspense fallback={<div>Loading...</div>}> */}
-        <Route path='recipes/edit/' component={EditRecipePage} exact={true} />
+        <Route
+          path='/recipes/:id/edit'
+          component={EditRecipePage}
+          exact={true}
+        />
+        <Route path='/recipes/add' component={RecipeAddPage} />
         <Route path='/recipes/:id' component={RecipePage} />
         <Route path='/recipes' component={RecipesPage} />
         <Route path='/account/edit' component={AccountEditPage} />
