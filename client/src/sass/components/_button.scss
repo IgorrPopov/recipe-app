@@ -1,4 +1,5 @@
 .button {
+  min-width: 25rem;
   padding: 1rem 0;
   border: none;
   text-transform: uppercase;
@@ -10,14 +11,17 @@
   color: #fff;
   font-size: 2rem;
   font-weight: bold;
-  transition: 0.1s;
+  letter-spacing: 0.3rem;
+  transition: all 0.2s;
+  /* to remove animation shaking */
+  backface-visibility: hidden;
 
   &:hover {
-    transform: translateY(-0.1rem);
+    transform: translateY(-0.2rem);
     box-shadow: 0 0.1rem 0.4rem rgba(#000, 0.2);
     background-image: linear-gradient(
       to right bottom,
-      lighten($color-primary-light, 10),
+      darken($color-primary-light, 10),
       darken($color-primary-dark, 10)
     );
   }
@@ -32,25 +36,27 @@
     outline: none;
   }
 
+  // ------------------------------------
+
   &--load-more-button {
     display: block;
     margin: 0 auto;
     margin-top: 7vw;
     padding: 2rem 4rem;
 
-    background-image: linear-gradient(
-      to right bottom,
-      $color-primary-light,
-      $color-primary-dark
-    );
+    // background-image: linear-gradient(
+    //   to right bottom,
+    //   $color-primary-light,
+    //   $color-primary-dark
+    // );
 
-    &:hover {
-      background-image: linear-gradient(
-        to right bottom,
-        lighten($color-primary-light, 10),
-        darken($color-primary-dark, 10)
-      );
-    }
+    // &:hover {
+    //   background-image: linear-gradient(
+    //     to right bottom,
+    //     darken($color-primary-light, 10),
+    //     darken($color-primary-dark, 10)
+    //   );
+    // }
   }
 
   &--upload-avatar {

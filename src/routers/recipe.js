@@ -4,11 +4,19 @@ const Recipe = require('../models/recipe');
 const auth = require('../middleware/auth');
 const upload = require('./utils/multerSetUp');
 const isRecipeDataValid = require('./utils/isRecipeDataValid');
-const { title } = require('process');
+
+// const mongoose = require('mongoose');
 
 const router = new express.Router();
 
 const imgNameArr = [];
+const defaultUsersIDs = [
+  '5fe06fc2ec384b3de893982f',
+  '5fe06feaec384b3de8939835',
+  '5fe070086f9b5d4224376d4b',
+  '5fe0703ffea07728f4798ce4',
+  '5fe07069d430860560a8515b',
+];
 
 // Create a recipe
 router.post(
@@ -17,73 +25,76 @@ router.post(
   upload.single('photo'),
   async (req, res) => {
     // --------------
-    // console.log('post');
-    const fs = require('fs');
-    const fetch = require('node-fetch');
+    // const fs = require('fs');
+    // const fetch = require('node-fetch');
 
-    async function downloadRandomImg() {
-      const apiUrl = 'https://www.themealdb.com/api/json/v1/1/random.php';
+    // async function downloadRandomImg() {
+    //   const apiUrl = 'https://www.themealdb.com/api/json/v1/1/random.php';
 
-      const response = await fetch(apiUrl);
+    //   const response = await fetch(apiUrl);
 
-      const apiRecipeObj = await response.json();
+    //   const apiRecipeObj = await response.json();
 
-      const {
-        strMeal: title,
-        strCategory: category,
-        strInstructions: description,
-        strMealThumb: imgUrl,
-      } = apiRecipeObj.meals[0];
+    //   const {
+    //     strMeal: title,
+    //     strCategory: category,
+    //     strInstructions: description,
+    //     strMealThumb: imgUrl,
+    //   } = apiRecipeObj.meals[0];
 
-      // prevent repeating recepis
-      if (imgNameArr.includes(imgUrl)) return 'Dublicat';
-      imgNameArr.push(imgUrl);
+    //   // prevent repeating recepis
+    //   if (imgNameArr.includes(imgUrl)) return 'Dublicat';
+    //   imgNameArr.push(imgUrl);
 
-      // parse ingredients
-      let ingredients = '';
+    //   // parse ingredients
+    //   let ingredients = '';
 
-      for (let i = 1; i <= 20; i++) {
-        const ingredient = apiRecipeObj.meals[0][`strIngredient${i}`];
-        if (ingredient !== '') ingredients += '\n' + ingredient;
-      }
+    //   for (let i = 1; i <= 20; i++) {
+    //     const ingredient = apiRecipeObj.meals[0][`strIngredient${i}`];
+    //     if (ingredient !== '') ingredients += '\n' + ingredient;
+    //   }
 
-      let rawRecipe = { title, category, description, ingredients };
+    //   let rawRecipe = { title, category, description, ingredients };
 
-      const validRecipeData = isRecipeDataValid(rawRecipe);
-      if (validRecipeData.error) return 'Invalid Recipe';
+    //   const validRecipeData = isRecipeDataValid(rawRecipe);
+    //   if (validRecipeData.error) return 'Invalid Recipe';
 
-      const validRecipe = validRecipeData.recipe;
+    //   const validRecipe = validRecipeData.recipe;
 
-      // img
-      const imgResponse = await fetch(imgUrl);
+    //   // img
+    //   const imgResponse = await fetch(imgUrl);
 
-      if (imgResponse.status !== 200) return 'No img';
+    //   if (imgResponse.status !== 200) return 'No img';
 
-      let buffer = await imgResponse.buffer();
+    //   let buffer = await imgResponse.buffer();
 
-      buffer = await sharp(buffer)
-        .resize({ width: 720, height: 400 })
-        .jpeg()
-        .toBuffer();
+    //   buffer = await sharp(buffer)
+    //     .resize({ width: 720, height: 400 })
+    //     .jpeg()
+    //     .toBuffer();
 
-      validRecipe.photo = buffer;
+    //   validRecipe.photo = buffer;
 
-      try {
-        const recipe = new Recipe({ ...validRecipe, owner: req.user._id });
-        await recipe.save();
-        return `Recipe: "${title}" loaded!`;
-      } catch (e) {
-        return 'Error: ' + e.message;
-      }
-    }
+    //   const randomOwnerIdString =
+    //     defaultUsersIDs[Math.floor(Math.random() * defaultUsersIDs.length)];
+    //   const randomOwnerId = mongoose.Types.ObjectId(randomOwnerIdString);
 
-    while (imgNameArr.length < 100) {
-      console.log(await downloadRandomImg());
-    }
+    //   try {
+    //     const recipe = new Recipe({ ...validRecipe, owner: randomOwnerId });
+    //     await recipe.save();
+    //     return `${imgNameArr.length + 1}) Recipe: "${title}" loaded!`;
+    //   } catch (e) {
+    //     return 'Error: ' + e.message;
+    //   }
+    // }
 
-    res.send(imgNameArr);
+    // while (imgNameArr.length < 10000) {
+    //   console.log(await downloadRandomImg());
+    // }
+
+    // res.send(imgNameArr);
     // ----------------
-    return;
+    // return;
     const validRecipe = isRecipeDataValid(req.body);
 
     if (validRecipe.error)
@@ -157,8 +168,8 @@ router.get('/recipes', auth, async (req, res) => {
           limit: limit,
           skip: skip,
           sort: {
-            createdAt: 1, // descending
-            // createdAt: -1 //  ascending
+            // createdAt: 1, // descending
+            createdAt: -1, //  ascending
           },
         },
       })

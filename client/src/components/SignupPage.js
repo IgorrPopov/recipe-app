@@ -52,7 +52,7 @@ const SignupPage = props => {
         const user = await response.json();
 
         setUser({ ...user });
-
+        localStorage.setItem('user', JSON.stringify(user));
         // setInputsErrors({});
 
         props.history.push('/dashboard');

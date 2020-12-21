@@ -1,8 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const RecipePage = props => {
-  const [recipe] = useState(props?.location?.state?.recipe || {});
+  const [recipe, setRecipe] = useState(props?.location?.state?.recipe || {});
   const { _id, title, category, description, ingredients, owner = {} } = recipe;
+
+  useEffect(() => {
+    if (!recipe || JSON.stringify(recipe) === '{}') {
+      const url = props?.location?.pathname || '';
+      const urlArr = url.split('/');
+      const _id = urlArr[urlArr.length - 1];
+
+      const loadRecipe = async () => {
+        try {
+          const response = await fetch(`/recipes/${_id}`, {
+            headers: {
+              'Content-Type': 'json/application',
+            },
+          });
+
+          if (response.status === 200) {
+            const recipe = await response.json();
+            setRecipe(recipe);
+          }
+        } catch (e) {}
+      };
+
+      loadRecipe();
+    }
+
+    console.log(props);
+  }, []);
 
   let { createdAt = '', updatedAt = '' } = recipe;
   createdAt = createdAt.split('T')[0].split('-').reverse().join('.');

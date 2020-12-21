@@ -8,6 +8,8 @@
 
   grid-gap: 2rem;
 
+  transition: all 0.2s;
+
   &:hover {
     box-shadow: 0 0.1rem 1rem rgba(#000, 0.3);
     // transform: translateY(-0.3rem);

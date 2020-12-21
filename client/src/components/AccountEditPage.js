@@ -10,16 +10,18 @@ import {
 const AccountEditPage = props => {
   const { user, setUser } = useContext(UserContext);
 
+  useEffect(() => {
+    if (user === null && localStorage.getItem('user') === null) {
+      props.history.push('/login');
+    }
+  }, [user]);
+
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [email, setEmail] = useState('');
   const [inputsErrors, setInputsErrors] = useState({});
-
-  useEffect(() => {
-    console.log('useEffect: ', { inputsErrors });
-  }, [inputsErrors]);
 
   const handleSignupFormSubmit = async e => {
     e.preventDefault();

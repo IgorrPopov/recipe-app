@@ -11,6 +11,12 @@ const AccountPage = props => {
   const { user, setUser } = useContext(UserContext);
   const history = useHistory();
 
+  useEffect(() => {
+    if (user === null && localStorage.getItem('user') === null) {
+      props.history.push('/login');
+    }
+  }, [user]);
+
   const loadAvatar = () => {
     // console.log('loadAvatar();');
     if (user?.user?._id) {

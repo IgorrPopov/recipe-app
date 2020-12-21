@@ -6,9 +6,11 @@ import MyRecipeCard from './MyRecipeCard';
 const DashboardPage = props => {
   const { user } = useContext(UserContext);
 
-  if (user === null) {
-    props.history.push('/login');
-  }
+  useEffect(() => {
+    if (user === null && localStorage.getItem('user') === null) {
+      props.history.push('/login');
+    }
+  }, [user]);
 
   const [RECIPES_LIMIT] = useState(10);
   const [recipesSkip, setRecipesSkip] = useState(RECIPES_LIMIT);
@@ -25,6 +27,8 @@ const DashboardPage = props => {
   useEffect(() => {
     const getRecipes = async () => {
       const token = user && user.token;
+
+      if (!token) return;
 
       try {
         let response = await fetch(`/recipes?limit=${RECIPES_LIMIT}`, {
@@ -50,7 +54,7 @@ const DashboardPage = props => {
     };
 
     getRecipes();
-  }, []);
+  }, [user]);
 
   const loadRecipes = async () => {
     const token = user && user.token;

@@ -14,6 +14,21 @@ const Header = props => {
   history.listen(() => window.scrollTo(0, 0));
 
   useEffect(() => {
+    if (user !== null) return;
+
+    const userString = localStorage.getItem('user');
+
+    if (userString === null) return;
+
+    try {
+      const userObj = JSON.parse(userString);
+      setUser(userObj);
+    } catch (e) {
+      return;
+    }
+  }, [user]);
+
+  useEffect(() => {
     if (user?.user?._id) {
       const avatar = (
         <img
@@ -46,6 +61,8 @@ const Header = props => {
         },
       });
 
+      localStorage.removeItem('user');
+
       setUser(() => {
         history.push('/');
         return null;
@@ -61,7 +78,7 @@ const Header = props => {
         <div className='header__logo-box'>
           <Link to='/'>
             <img
-              src='./img/yummy_bay_logo.png'
+              src='/img/yummy_bay_logo.png'
               alt='logo'
               className='header__logo'
             />

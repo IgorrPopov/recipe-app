@@ -5,12 +5,14 @@
 
   text-decoration: none;
   color: currentColor;
-
-  transition: all 0.2s;
+  /* to remove animation shaking */
+  backface-visibility: hidden;
+  // -webkit-transform: translateZ(0) scale(1, 1);
+  transition: transform 0.3s;
 
   &:hover {
-    box-shadow: 0 0.1rem 1rem rgba(#000, 0.3);
-    // transform: translateY(-0.3rem);
+    // box-shadow: 0 0.1rem 1rem rgba(#000, 0.3);
+    transform: translateZ(0) translateY(-0.3rem);
   }
 
   &__img {

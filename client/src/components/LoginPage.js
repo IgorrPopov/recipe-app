@@ -41,6 +41,7 @@ const LoginPage = props => {
         const user = await response.json();
 
         setUser({ ...user });
+        localStorage.setItem('user', JSON.stringify(user));
 
         props.history.push('/dashboard');
       }
