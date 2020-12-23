@@ -92,7 +92,6 @@ userSchema.methods.toJSON = function () {
   delete userObject.password;
   delete userObject.tokens;
   delete userObject.__v;
-  // delete userObject.createdAt;
   delete userObject.updatedAt;
   delete userObject.avatar;
 
@@ -118,7 +117,6 @@ userSchema.statics.findByCredentials = async (email, password) => {
 
 // Hash the plain text password before saving
 userSchema.pre('save', async function (next) {
-  // 'this' is a document (user)
   const user = this;
   // it's true if user has been created and if the password was changed
   if (user.isModified('password')) {

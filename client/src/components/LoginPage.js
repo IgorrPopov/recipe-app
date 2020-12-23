@@ -96,9 +96,6 @@ const LoginPage = props => {
                   {inputsErrors.general}
                 </span>
               )}
-              {/* <label htmlFor='email' className='signup-form__label'>
-                Email
-              </label> */}
               <input
                 type='text'
                 name='email'
@@ -116,9 +113,6 @@ const LoginPage = props => {
                   {inputsErrors.password}
                 </span>
               )}
-              {/* <label htmlFor='password' className='signup-form__label'>
-                Password
-              </label> */}
               <input
                 type='password'
                 autoComplete='new-password'

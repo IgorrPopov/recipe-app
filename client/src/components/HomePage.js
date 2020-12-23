@@ -100,14 +100,10 @@ const HomePage = () => {
               <span className='heading-secondary__char15'>O</span>
               <span className='heading-secondary__char16'>D</span>
             </h2>
-            {/* <a href='#' className='button-text'>
-              <div className='button-text__text'>Just try it</div>
-            </a> */}
           </div>
         </div>
       </section>
       <section className='section-recipes'>
-        {/* <h3 className='heading-tertiary'>Just try our recipes</h3> */}
         <div className='section-recipes__container'>
           {!titleRecipe || (
             <div className='section-recipes__big-card-wrapper'>

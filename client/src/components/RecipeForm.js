@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+
 import { UserContext } from './UserContext';
 import { useHistory } from 'react-router-dom';
 import {
@@ -10,8 +11,6 @@ import {
 } from './utils/inputsValidation';
 
 const RecipeForm = ({ recipe = {} }) => {
-  // console.log({ recipe });
-
   const { user } = useContext(UserContext);
   const history = useHistory();
   const [title, setTitle] = useState(recipe?.title || '');
@@ -71,7 +70,6 @@ const RecipeForm = ({ recipe = {} }) => {
     if (validRecipe.photo) {
       fd.append('photo', validRecipe.photo);
     }
-    // console.log(validRecipe.photo);
 
     try {
       let response;

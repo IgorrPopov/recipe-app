@@ -18,7 +18,6 @@ const AccountPage = props => {
   }, [user]);
 
   const loadAvatar = () => {
-    // console.log('loadAvatar();');
     if (user?.user?._id) {
       const avatar = (
         <img
@@ -30,7 +29,6 @@ const AccountPage = props => {
       );
 
       setAvatarImg(avatar);
-      // setUser(user);
     }
   };
 
@@ -84,7 +82,6 @@ const AccountPage = props => {
   };
 
   const handleSendPhotoClick = async () => {
-    // console.log({ handleSendPhotoClick });
     if (!photo) return;
 
     const validPhoto = isFileValid(photo);
@@ -105,8 +102,6 @@ const AccountPage = props => {
           },
           body: fd,
         });
-
-        // console.log({ response });
 
         if (response.status === 200) {
           loadAvatar();

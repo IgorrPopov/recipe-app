@@ -80,8 +80,6 @@ const AccountEditPage = props => {
       if (response.status === 200) {
         const updatedUser = await response.json();
 
-        // console.log({ updatedUser });
-
         setUser({ user: { ...updatedUser }, token: user.token });
 
         return props.history.push('/account');
@@ -168,9 +166,6 @@ const AccountEditPage = props => {
                   {inputsErrors.general}
                 </span>
               )}
-              {/* <label htmlFor='name' className='signup-form__label'>
-              Name
-            </label> */}
               <input
                 type='text'
                 name='name'
@@ -188,9 +183,6 @@ const AccountEditPage = props => {
                   {inputsErrors.email}
                 </span>
               )}
-              {/* <label htmlFor='email' className='signup-form__label'>
-              Email
-            </label> */}
               <input
                 type='text'
                 name='email'
@@ -209,9 +201,6 @@ const AccountEditPage = props => {
                   {inputsErrors.password}
                 </span>
               )}
-              {/* <label htmlFor='password' className='signup-form__label'>
-              Password
-            </label> */}
               <input
                 type='password'
                 autoComplete='new-password'
@@ -229,9 +218,6 @@ const AccountEditPage = props => {
                   Password doesn't match
                 </span>
               )}
-              {/* <label htmlFor='password-repeat' className='signup-form__label'>
-              Repeat Password
-            </label> */}
               <input
                 type='password'
                 autoComplete='new-password'
@@ -243,7 +229,6 @@ const AccountEditPage = props => {
                 placeholder='New Password Repeat'
               />
             </div>
-            {/*  */}
 
             <div className='signup-form__box'>
               {!inputsErrors.currentPassword || (
@@ -263,7 +248,6 @@ const AccountEditPage = props => {
               />
             </div>
 
-            {/*  */}
             <div className='signup-form__box signup-form__box--text-message'>
               * Fill only than inputs that you want to change but your current
               password is required!

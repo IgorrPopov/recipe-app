@@ -2,7 +2,6 @@
   margin: 0 auto;
   margin-top: 5rem;
   max-width: 120rem;
-
   display: flex;
   justify-content: center;
 }
@@ -14,26 +13,15 @@
 
   &__img {
     position: relative;
-
     width: 50%;
-    // height: 100%;
-    // background-color: green;
     background-image: linear-gradient(
         to left bottom,
         rgba($color-primary-dark, 0.8),
         rgba($color-primary-light, 0.8)
       ),
       url('../../img/food-1jpg.jpg');
-    // background-position: center;
     background-repeat: no-repeat;
     background-position: center;
-    // object-fit: fill;
-
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
-
     display: grid;
     grid-template-rows: 1fr 1fr;
     align-items: center;
@@ -65,10 +53,6 @@
 
   &__avatar {
     width: 50%;
-    // height: 50%;
-    // object-fit: fill;
-    //   display: block;
-    //   width: 10%;
   }
 
   &__icon {
@@ -80,7 +64,6 @@
     width: 50%;
     height: 100%;
     background-color: #fff;
-
     display: flex;
     flex-direction: column;
     justify-content: center;

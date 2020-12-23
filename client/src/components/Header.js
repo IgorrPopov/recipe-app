@@ -115,7 +115,6 @@ const Header = props => {
                 </Link>
               </div>
             </div>
-            {/* <div className='user-nav__line'></div> */}
           </nav>
         )}
       </div>

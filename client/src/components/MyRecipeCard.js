@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-// import { UserContext } from './UserContext';
 
 const MyRecipeCard = ({
   recipe = {},

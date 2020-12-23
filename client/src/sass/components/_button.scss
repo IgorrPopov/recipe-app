@@ -43,33 +43,16 @@
     margin: 0 auto;
     margin-top: 7vw;
     padding: 2rem 4rem;
-
-    // background-image: linear-gradient(
-    //   to right bottom,
-    //   $color-primary-light,
-    //   $color-primary-dark
-    // );
-
-    // &:hover {
-    //   background-image: linear-gradient(
-    //     to right bottom,
-    //     darken($color-primary-light, 10),
-    //     darken($color-primary-dark, 10)
-    //   );
-    // }
   }
 
   &--upload-avatar {
-    // border: 2px solid #fff;
     font-size: 1.5rem;
-    // font-weight: bold;
     padding: 1rem 3rem;
   }
 
   &__my-recipe-card {
     width: 15rem;
     font-size: 2rem;
-    // font-weight: bold;
     padding: 1rem;
 
     &--delete {

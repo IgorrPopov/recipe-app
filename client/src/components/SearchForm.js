@@ -29,7 +29,6 @@ const SearchForm = props => {
 
       if (response.status === 200) {
         response = await response.json();
-        // console.log('Seach form se');
         history.push({
           pathname: '/recipes',
           state: {

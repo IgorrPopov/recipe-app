@@ -41,8 +41,6 @@ const DashboardPage = props => {
 
         if (response.status === 200) {
           response = await response.json();
-          // console.log({ response });
-          // const recipesArr = response.recipes;
 
           if (response && response.length > 0) {
             setRecipes(response);

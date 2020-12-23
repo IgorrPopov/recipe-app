@@ -8,7 +8,7 @@ import {
 } from './utils/inputsValidation';
 
 const SignupPage = props => {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -53,7 +53,6 @@ const SignupPage = props => {
 
         setUser({ ...user });
         localStorage.setItem('user', JSON.stringify(user));
-        // setInputsErrors({});
 
         props.history.push('/dashboard');
       }
@@ -125,9 +124,6 @@ const SignupPage = props => {
                   {inputsErrors.general}
                 </span>
               )}
-              {/* <label htmlFor='name' className='signup-form__label'>
-              Name
-            </label> */}
               <input
                 type='text'
                 name='name'
@@ -145,9 +141,6 @@ const SignupPage = props => {
                   {inputsErrors.email}
                 </span>
               )}
-              {/* <label htmlFor='email' className='signup-form__label'>
-              Email
-            </label> */}
               <input
                 type='text'
                 name='email'
@@ -165,9 +158,6 @@ const SignupPage = props => {
                   {inputsErrors.password}
                 </span>
               )}
-              {/* <label htmlFor='password' className='signup-form__label'>
-              Password
-            </label> */}
               <input
                 type='password'
                 autoComplete='new-password'
@@ -185,9 +175,6 @@ const SignupPage = props => {
                   Password doesn't match
                 </span>
               )}
-              {/* <label htmlFor='password-repeat' className='signup-form__label'>
-              Repeat Password
-            </label> */}
               <input
                 type='password'
                 autoComplete='new-password'

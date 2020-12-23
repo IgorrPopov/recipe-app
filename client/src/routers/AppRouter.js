@@ -26,7 +26,6 @@ const AppRouter = () => (
         <Route path='/signup' component={SignupPage} />
         <Route path='/login' component={LoginPage} />
         <Route path='/dashboard' component={DashboardPage} />
-        {/* <Suspense fallback={<div>Loading...</div>}> */}
         <Route
           path='/recipes/:id/edit'
           component={EditRecipePage}
@@ -37,7 +36,6 @@ const AppRouter = () => (
         <Route path='/recipes' component={RecipesPage} />
         <Route path='/account/edit' component={AccountEditPage} />
         <Route path='/account' component={AccountPage} />
-        {/* </Suspense> */}
       </Switch>
     </main>
     <Footer />

@@ -7,7 +7,6 @@
   color: currentColor;
   transition: all 0.2s;
   overflow: visible;
-  // overflow-y: visible;
 
   &:hover {
     box-shadow: 0 0.1rem 1rem rgba(#000, 0.3);
@@ -25,21 +24,17 @@
   }
 
   &__title {
-    // width: fit-content;
     font-size: 3rem;
     position: absolute;
     padding: 0 3rem;
     bottom: 11rem;
     width: 120%;
-    // right: -1rem;
     left: 4rem;
-
     background-image: linear-gradient(
       to bottom,
       rgba($color-primary-light, 0.8),
       rgba($color-primary-dark, 1)
     );
-
     color: #fff;
   }
 
@@ -52,6 +47,5 @@
     font-size: 3rem;
     text-transform: capitalize;
     background-color: #fff;
-    // text-align: left;
   }
 }
